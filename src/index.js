@@ -38,8 +38,7 @@ findInFiles
       console.log(`\nFound todo count: ${TODOcounter}\nCurrent todo count(README.md): ${readMeTodoCounter}`)
 
       // only update todo counter if current README.md todo DOES NOT match todos found
-      // TODO check why if statement isn't true
-      if (~~readMeTodoCounter == TODOcounter) {
+      if (readMeTodoCounter !== TODOcounter) {
         // find and replace todo counter in README file
         var newValue = data.replace(
           /current\stodo\scounter:\s\d/i,
