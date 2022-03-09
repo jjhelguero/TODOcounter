@@ -15,7 +15,8 @@ fs.readdir(directory, function (err, filesArray) {
         .filter(isJSFile) // filter by .js files only
         .forEach(file => {
             const filePath = directory + '/' + file
-            console.log(`Adding valid todo comment to ${file} file`)
+            // TODO console logs are out of sync
+            console.log(`Adding valid todo comment to ${filePath} file`)
             fs.writeFile(filePath, appendedComment, { flag }, function (err, data) {
                 if (err) throw err;
                 console.log('Valid todo comment appended!');
