@@ -25,17 +25,24 @@ findInFiles
         console.log('\nTotal found Todos: ' + TODOcounter);
 
 
-        // TODO check TODO counter equals TODOs found, if so update, if not do not update
         fs.readFile(readmeFile, 'utf-8', function (err, data) {
             if (err) throw err;
 
-            // find and replace todo counter in README file
-            var newValue = data.replace(/current\stodo\scounter:\s\d/i, `Current TODO counter: ${TODOcounter}`);
+            const readMeTodoCounter = data.match(/current\stodo\scounter:\s(?<todocounter>\d)/)?.groups?.todocounter
 
-            console.log(`\nUpdating ${readmeFile} file with updated todo count of ${TODOcounter}\n`)
-            fs.writeFile(readmeFile, newValue, 'utf-8', function (err, data) {
-                if (err) throw err;
-                console.log('TODO counter updated!');
-            })
+            // only update todo counter if current README.md todo DOES NOT match todos found
+            if (readMeTodoCounter == TODOcounter) {
+                // find and replace todo counter in README file
+                var newValue = data.replace(/current\stodo\scounter:\s\d/i, `Current TODO counter: ${TODOcounter}`);
+
+                console.log(`\nUpdating ${readmeFile} file with updated todo count of ${TODOcounter}\n`)
+                fs.writeFile(readmeFile, newValue, 'utf-8', function (err, data) {
+                    if (err) throw err;
+                    console.log('TODO counter updated!\n');
+                })
+            } else {
+                console.log('\nNo changes in TODO counter.')
+            }
+
         })
     });
