@@ -25,6 +25,7 @@ findInFiles
         console.log('\nTotal found Todos: ' + TODOcounter);
 
 
+        // TODO check TODO counter equals TODOs found, if so update, if not do not update
         fs.readFile(readmeFile, 'utf-8', function (err, data) {
             if (err) throw err;
 
