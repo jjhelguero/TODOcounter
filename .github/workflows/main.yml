@@ -20,6 +20,8 @@ jobs:
           npm run updateTodos
           echo "Pushing commit to the remote in the workflow" >> README.md
 
+          git config --global user.email "pushworkflow@example.com"
+          git config --global user.name "main.yml"
           git add -A
           git commit -m "Main workflow - updates README.md"
           git push
