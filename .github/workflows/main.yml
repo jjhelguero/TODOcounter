@@ -1,10 +1,11 @@
-name: update-Todo-Counter
+name: Todo-Counter
 on:
   push:
     branches:
       - master
-#   schedule:
-#     - cron: '*/5 * * *'
+    # run job every month, Mon-Thru at 12:00 PM
+    schedule:
+      - cron: '0 18 * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
