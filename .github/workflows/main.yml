@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-            github_token: '${{ secrets.GITHUB_TOKEN }}'
-            branch: '${{ github.ref }}'
 
       - name: install dependencies
         run: npm install
