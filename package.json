@@ -5,7 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "format": "prettier --write index.js"
+    "format": "prettier --write src/*.js",
+    "updateTodos": "node src/index.js",
+    "addTodos": "node src/addOneMoreTodoToFiles.js"
   },
   "lint-staged": {
     "*.js": [
