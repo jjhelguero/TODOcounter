@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+            github_token: '${{ secrets.GITHUB_TOKEN }}'
+            branch: '${{ github.ref }}'
 
       - name: install dependencies
         run: npm install
       - name: get current todos and update todo counter
-        with:
-          github_token: '${{ secrets.GITHUB_TOKEN }}'
-          branch: '${{ github.ref }}'
         run: |
           npm run updateTodos
           echo "Pushing commit to the remote in the workflow" >> README.md
