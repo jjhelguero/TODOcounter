@@ -1,8 +1,9 @@
-name: Todo-Counter
+name: trigger-addTodos
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,7 +13,19 @@ jobs:
 
       - name: install dependencies
         run: npm install
+      - name: add todos to .js files
+        with:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          branch: '${{ github.ref }}'
+        run: |
+          npm run addTodos
+          echo "Pushing commit to the remote in the workflow" >> README.md
+
+          git add -A
+          git commit -m "Main workflow - updates README.md"
+          git push
       - name: get current todos and update todo counter
+        run: npm run updateTodos
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
           branch: '${{ github.ref }}'
