@@ -1,7 +1,7 @@
 var fs = require('fs');
-const directory = 'Test';
+const directory = 'test';
 const flag = 'a+';
-const appendedComment = '\n// TODO valid todo';
+const appendedComment = '// TODO valid todo';
 
 function isJSFile(file) {
   return file.indexOf('.js') >= 0;
@@ -17,7 +17,7 @@ fs.readdir(directory, function (err, filesArray) {
       const filePath = directory + '/' + file;
       // TODO console logs are out of sync
       console.log(`Adding valid todo comment to ${filePath} file`);
-      fs.writeFile(filePath, appendedComment, { flag }, function (err, data) {
+      fs.writeFile(filePath, '\n' + appendedComment, { flag }, function (err, data) {
         if (err) throw err;
         console.log('Valid todo comment appended!');
       });
