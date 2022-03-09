@@ -1,0 +1,23 @@
+name: update-Todo-Counter
+on:
+  push:
+    branches:
+      - master
+#   schedule:
+#     - cron: '*/5 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: npm install, addTodos, and updateTodos
+        run: |
+          npm install,
+          npm run addTodos,
+          npm run updateTodos
