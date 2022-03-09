@@ -17,8 +17,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: npm install, addTodos, and updateTodos
-        run: |
-          npm install,
-          npm run addTodos,
-          npm run updateTodos
+      - name: install dependencies
+        run: npm install
+      - name: add todos to .js files
+        run: npm run addTodos
+      - name: get current todos and update todo counter
+        run: npm run updateTodos
