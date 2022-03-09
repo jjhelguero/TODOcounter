@@ -1,0 +1,20 @@
+{
+  "name": "TODO counter",
+  "version": "1.0.0",
+  "description": "Count Todo in files",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write index.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "find-in-files": "^0.5.0",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.5.1"
+  }
+}
