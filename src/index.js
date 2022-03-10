@@ -4,7 +4,7 @@ var fs = require('fs');
 const readmeFile = 'README.md';
 const directory = 'test'
 const fileFilter = '.js$'
-const term = /\/\/\s?todo/
+const term = /\/\/\s?todo\s? \w+/
 const flags = 'ig'
 const currentTodoRegex = /current\stodo\scounter:\s(?<todocounter>\d+)/i
 
