@@ -6,3 +6,5 @@
 //TODOthis will not be found
 //todosThisWillNotBeFound
 // TODO valid todo
+// TODO valid todo
+// TODO valid todo
