@@ -18,7 +18,7 @@ jobs:
           git config user.email "pushworkflow@example.com"
           git config user.name "main.yml"
           git add -A
-          git commit -m "trigger-addTodos workflow - updates README.md"
+          git commit -m "trigger-addTodos workflow - add more // todos"
           git push
       - name: get current todos and update todo counter
         run: |
