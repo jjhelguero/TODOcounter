@@ -1,5 +1,5 @@
 name: Todo-Counter
-on:
+# on:
 #   push:
 #     branches:
 #       - master
