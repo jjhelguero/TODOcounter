@@ -13,17 +13,17 @@ jobs:
       - name: add todos to .js files
         run: |
           npm run addTodos
-          echo "Pushing commit to the remote in the workflow"
+          echo "Pushing commit to the remote repo"
 
           git config user.email "pushworkflow@example.com"
           git config user.name "main.yml"
           git add -A
-          git commit -m "Main workflow - updates README.md"
+          git commit -m "${{ workflow.name }} - updates README.md"
           git push
       - name: get current todos and update todo counter
         run: |
           npm run updateTodos
-          echo "Pushing commit to the remote in the workflow"
+          echo "Pushing commit to the remote repo"
 
           git config user.email "pushworkflow@example.com"
           git config user.name "main.yml"
