@@ -1,8 +1,8 @@
 name: Todo-Counter
 on:
-  # push:
-  #   branches:
-  #     - master
+  push:
+    branches:
+      - master
   schedule:
       - cron: '0 18 * * 1-5'
 
@@ -12,15 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install dependencies
-        run: npm install
-      - name: get current todos and update todo counter
-        run: |
-          npm run updateTodos
-          echo "Pushing commit to the remote repo"
+      # - name: install dependencies
+      #   run: npm install
+      # TODO add condition from updateTodos to commit and push or not
+      # - name: get current todos and update todo counter
+      #   run: |
+      #     npm run updateTodos
+      #     echo "Pushing commit to the remote repo"
 
-          git config user.email "pushworkflow@example.com"
-          git config user.name "main.yml"
-          git add -A
-          git commit -m "Main workflow - updates README.md"
-          git push
+      #     git config user.email "pushworkflow@example.com"
+      #     git config user.name "main.yml"
+      #     git add -A
+      #     git commit -m "Main workflow - updates README.md"
+      #     git push
