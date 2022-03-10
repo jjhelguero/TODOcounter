@@ -21,7 +21,6 @@ jobs:
           git commit -m "Main workflow - updates README.md"
           git push
       - name: get current todos and update todo counter
-        run: npm run updateTodos
         run: |
           npm run updateTodos
           echo "Pushing commit to the remote in the workflow"
