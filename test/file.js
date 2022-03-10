@@ -4,6 +4,3 @@ TODOthiswillnotbefound
 //todo ThisWillBeFound
 
 //todosThisWillNotBeFound
-// TODO valid todo
-// TODO valid todo
-// TODO valid todo

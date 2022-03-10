@@ -6,6 +6,7 @@ const directory = 'test'
 const fileFilter = '.js$'
 const term = /\/\/\s?todo/
 const flags = 'ig'
+const currentTodoRegex = /current\stodo\scounter:\s(?<todocounter>\d+)/i
 
 let TODOcounter = 0;
 
@@ -32,7 +33,7 @@ findInFiles
       if (err) throw err;
 
       const readMeTodoCounter = data.match(
-        /current\stodo\scounter:\s(?<todocounter>\d)/i,
+        currentTodoRegex,
       )?.groups?.todocounter
 
       console.log(`\nFound todo count: ${TODOcounter}\nCurrent todo count(README.md): ${readMeTodoCounter}`)
@@ -41,7 +42,7 @@ findInFiles
       if (~~readMeTodoCounter !== TODOcounter) {
         // find and replace todo counter in README file
         var newValue = data.replace(
-          /current\stodo\scounter:\s\d/i,
+          currentTodoRegex,
           `Current TODO counter: ${TODOcounter}`,
         );
 
