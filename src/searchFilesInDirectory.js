@@ -58,6 +58,8 @@ function searchFilesInDirectory(dir, ext) {
         return;
     }
 
+    debug(`Searching for todos in ${dir}`)
+
     const files = getFilesInDirectory(dir, ext);
 
     console.log('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
@@ -66,5 +68,4 @@ function searchFilesInDirectory(dir, ext) {
     return getTodoCount(files)
 }
 
-searchFilesInDirectory('test/', '.js')
 module.exports = searchFilesInDirectory
