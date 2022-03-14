@@ -17,6 +17,6 @@ jobs:
       - name: Commit any file changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: $GITHUB_WORKFLOW - Updated
+          commit_message: addTodos - Updated
           branch: master
           file_pattern: test/*.js README.md
