@@ -1,7 +1,7 @@
 name: trigger-resetTodos
 on:
   schedule:
-      - cron: '0 18 * * 1-5'
+      - cron: '0 0 1 * *'
   workflow_dispatch:
 
 jobs:
