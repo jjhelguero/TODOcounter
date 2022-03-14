@@ -11,16 +11,12 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: add todos to .js files
-        run: |
-          npm run addTodos
-          echo "Pushing commit to the remote repo"
+        run: npm run addTodos
       - name: get current todos and update todo counter
-        run: |
-          npm run updateTodos
-          echo "Pushing commit to the remote repo"
+        run: npm run updateTodos
       - name: Commit any file changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: $GITHUB_WORKFLOW - Updated
-          branch: main
+          branch: master
           file_pattern: test/*.js README.md
