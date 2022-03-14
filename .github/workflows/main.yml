@@ -14,7 +14,6 @@ jobs:
 
       - name: install dependencies
         run: npm install
-      # TODO add condition from updateTodos to commit and push or not
       - name: get current todos and update todo counter
         run: npm run updateTodos
       - name: Commit any file changes
