@@ -7,7 +7,8 @@
   "scripts": {
     "format": "prettier --write 'src/*.js'",
     "updateTodos": "node src/index.js",
-    "addTodos": "node src/addOneMoreTodoToFiles.js"
+    "addTodos": "node src/addOneMoreTodoToFiles.js",
+    "resetTodos": "node src/resetToZeroTodos.js"
   },
   "lint-staged": {
     "*.js": [
