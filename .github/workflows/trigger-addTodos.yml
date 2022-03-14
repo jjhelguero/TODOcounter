@@ -35,4 +35,4 @@ jobs:
         with:
           commit_message: $GITHUB_WORKFLOW - Updated
           branch: main
-          file_pattern: README.md
+          file_pattern: test/*.js
