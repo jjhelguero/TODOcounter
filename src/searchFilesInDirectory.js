@@ -27,18 +27,9 @@ function getFilesInDirectory(dir, ext) {
     return files
 }
 
-function searchFilesInDirectory(dir, ext) {
-    if (!fs.existsSync(dir)) {
-        console.log(`Specified directory: ${dir} does not exist`);
-        return;
-    }
-
+function getTodoCount(files) {
     const regex = /\/{2}\s?todo\s?/
     const flags = 'ig'
-    const files = getFilesInDirectory(dir, ext);
-
-    console.log('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
-
     let todoCounter = 0
 
     files.forEach(file => {
@@ -61,4 +52,19 @@ function searchFilesInDirectory(dir, ext) {
     return todoCounter
 }
 
+function searchFilesInDirectory(dir, ext) {
+    if (!fs.existsSync(dir)) {
+        console.log(`Specified directory: ${dir} does not exist`);
+        return;
+    }
+
+    const files = getFilesInDirectory(dir, ext);
+
+    console.log('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
+
+
+    return getTodoCount(files)
+}
+
+searchFilesInDirectory('test/', '.js')
 module.exports = searchFilesInDirectory
