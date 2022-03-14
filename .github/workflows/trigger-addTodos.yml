@@ -20,13 +20,19 @@ jobs:
           git add -A
           git commit -m "$GITHUB_WORKFLOW - add more // todos"
           git push
-      - name: get current todos and update todo counter
-        run: |
-          npm run updateTodos
-          echo "Pushing commit to the remote repo"
+      # - name: get current todos and update todo counter
+      #   run: |
+      #     npm run updateTodos
+      #     echo "Pushing commit to the remote repo"
 
-          git config user.email "pushworkflow@example.com"
-          git config user.name "main.yml"
-          git add -A
-          git commit -m "$GITHUB_WORKFLOW - updates README.md"
-          git push
+      #     git config user.email "pushworkflow@example.com"
+      #     git config user.name "main.yml"
+      #     git add -A
+      #     git commit -m "$GITHUB_WORKFLOW - updates README.md"
+      #     git push
+      - name: Commit any file changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: $GITHUB_WORKFLOW - Updated
+          branch: main
+          file_pattern: README.md
