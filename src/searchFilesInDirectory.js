@@ -89,4 +89,4 @@ function searchFilesInDirectory(dir, ext) {
     return getTodoCount(files)
 }
 
-module.exports = searchFilesInDirectory
+module.exports = { searchFilesInDirectory, getTodoCount, getFilesInDirectory }
