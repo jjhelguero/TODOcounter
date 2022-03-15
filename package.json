@@ -1,14 +1,20 @@
 {
-  "name": "TODO counter",
+  "name": "todoCounter",
   "version": "1.0.0",
   "description": "Count Todo in files",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "format": "prettier --write 'src/*.js'",
     "updateTodos": "node src/index.js",
     "addTodos": "node src/addOneMoreTodoToFiles.js",
-    "resetTodos": "node src/resetToZeroTodos.js"
+    "resetTodos": "node src/resetToZeroTodos.js",
+    "test": "ava test"
+  },
+  "ava": {
+    "files": [
+      "test/*-test.js"
+    ]
   },
   "lint-staged": {
     "*.js": [
