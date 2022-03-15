@@ -4,6 +4,14 @@ const util = require('util')
 
 const debug = require('debug')('filterFiles')
 
+/**
+ * Utility function to get all files in given directory and subdirectories
+ * with matching ext and returns an array of strings for matching
+ * files
+ * @param {String} dir directory string
+ * @param {String} ext file extenstion string
+ * @returns {Array<string>} returns array of files with matching extension
+ */
 function getFilesInDirectory(dir, ext) {
     if (!fs.existsSync(dir)) {
         console.log(`Specified directory: ${dir} does not exist`)
@@ -27,6 +35,12 @@ function getFilesInDirectory(dir, ext) {
     return files
 }
 
+/**
+ * Utility function to get all todo comment counts in passed files array 
+ * and returns the total count
+ * @param {Array<string>} files 
+ * @returns {Number} returns total todo count in files
+ */
 function getTodoCount(files) {
     const regex = /\/{2}\s?todo\s?/
     const flags = 'ig'
@@ -52,6 +66,13 @@ function getTodoCount(files) {
     return todoCounter
 }
 
+/**
+ * Function to get total count of todos within files matching ext within
+ * directory(icluding subdirectories)
+ * @param {String} dir directory string
+ * @param {String} ext file extenstion string
+ * @returns {Number} returns total todo count in files
+ */
 function searchFilesInDirectory(dir, ext) {
     if (!fs.existsSync(dir)) {
         console.log(`Specified directory: ${dir} does not exist`);
