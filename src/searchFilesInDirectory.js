@@ -1,5 +1,5 @@
 const fs = require('fs')
-const path = require('path');
+const path = require('path')
 const util = require('util')
 
 const debug = require('debug')('filterFiles')
@@ -75,18 +75,18 @@ function getTodoCount(files) {
  */
 function searchFilesInDirectory(dir, ext) {
     if (!fs.existsSync(dir)) {
-        console.log(`Specified directory: ${dir} does not exist`);
-        return;
+        console.log(`Specified directory: ${dir} does not exist`)
+        return
     }
 
     debug(`Searching for todos in ${dir}`)
 
-    const files = getFilesInDirectory(dir, ext);
+    const files = getFilesInDirectory(dir, ext)
 
-    console.log('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
+    debug('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
 
 
     return getTodoCount(files)
 }
 
-module.exports = { searchFilesInDirectory, getTodoCount, getFilesInDirectory }
+module.exports = searchFilesInDirectory, getTodoCount, getFilesInDirectory
