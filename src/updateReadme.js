@@ -3,7 +3,7 @@ const debug = require('debug')('updateReadMeTodoCounter')
 var dayjs = require('dayjs')
 
 
-// const todoRowRegex = /(?<todoRow>\|<date\d+>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter\d+>(\d+)?\|)/gi
+// const todoRowRegex = /(?<todoRow>\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|)/gi
 
 function extractTodoRows(readMe) {
   debug('Extracting todo rows')
@@ -15,67 +15,55 @@ function extractTodoRows(readMe) {
   return matchedRows
 }
 
-function updateTodoTable(rowArray, todoCount) {
-  debug('Updating todo table')
-  const d = new Date()
-  const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<todoCounter>${todoCount}|`
-  rowArray.push(newRow)
+function updateTodoTable(readMe, data, rowArray, todoCount) {
+  // TODO add logic if latest todoCounter matches todoCount
+  const lastRow = rowArray[rowArray.length - 1]
+  const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
+  const latestTodoCount = lastRow.match(lastTodoCountRegex).groups.count
+  const updateTodoTableBool = (latestTodoCount != todoCount)
 
-  console.log(rowArray)
+  debug(`Latest table todo count: ${latestTodoCount}\nFound todo count: ${todoCount}`)
 
-  // rowArray.shift()
+  if (updateTodoTableBool) {
+    debug('Updating todo table')
 
-  debug('Todo table updated!')
+    const d = new Date()
+    const date = dayjs(d).format('MM/DD/YY')
+    const newRow = `|<date>${date}|<todoCounter>${todoCount}|`
+    const tableRegex = /(?<todoRow>\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|)/i
+
+    rowArray.push(newRow)
+    debug('Added new todo row')
+
+    rowArray.shift()
+    debug('Removed first(old) todo row')
+
+    // TODO figure out how to get all table with regex and then replace
+    data.replace(tableRegex, rowArray)
+    console.log(data.replace(tableRegex, rowArray))
+    // TODO uncomment when above is fixed
+    // fs.writeFile(readMe, newValue, 'utf-8', function (err, data) {
+    //   if (err) throw err
+    //   debug('Todo table updated!')
+    // })
+  } else {
+    console.log('No change in todo count')
+  }
 }
 
 function updateReadMeTodoCounter(tcounter) {
   const readmeFile = 'README.md'
 
+
+  debug(`Reading ${readmeFile} file`)
   fs.readFile(readmeFile, 'utf-8', function (err, data) {
     if (err) throw err;
 
     const todoRows = extractTodoRows(data)
 
-    updateTodoTable(todoRows, tcounter)
-
-    // TODO update
-    // console.log({ todoRows })
-    // console.log(
-    //   `Found todo count: ${tcounter}\nREADME.md todo count: ${readMeTodoCounter}`,
-    // );
-
-    //   // only update todo counter if current README.md todo DOES NOT match todos found
-    //   if (~~readMeTodoCounter !== tcounter) {
-    //     // find and replace todo counter in README file
-    //     var newValue = data.replace(
-    //       currentTodoRegex,
-    //       `Current TODO counter: ${tcounter}`,
-    //     );
-
-    //     console.log(
-    //       `Updating ${readmeFile} file with updated todo count of ${tcounter}`,
-    //     );
-    //     fs.writeFile(readmeFile, newValue, 'utf-8', function (err, data) {
-    //       if (err) throw err;
-    //       console.log('TODO counter updated!');
-    //     });
-    //   } else {
-    //     console.log('No changes in TODO counter.');
-    //   }
+    updateTodoTable(readmeFile, data, todoRows, tcounter)
   })
 }
 
-function searchForTodos(results) {
-  let TODOcounter = 0;
-  for (var result in results) {
-    var res = results[result];
-    console.log(`found "${res.matches[0]}" ${res.count} times in "${result}"`);
-
-    TODOcounter += res.count;
-  }
-  udpateReadMeTodoCounter(TODOcounter);
-}
-
-updateReadMeTodoCounter(2)
+updateReadMeTodoCounter(1)
 module.exports = updateReadMeTodoCounter
