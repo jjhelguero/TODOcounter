@@ -1,9 +1,8 @@
 {
   "name": "todoCounter",
   "version": "1.0.0",
-  "description": "Count Todo in files",
-  "main": "index.js",
-  "private": false,
+  "description": "Count todo comments in given directory with filter ext",
+  "main": "src/index.js",
   "scripts": {
     "format": "prettier --write 'src/*.js'",
     "updateTodos": "node src/index.js",
@@ -11,6 +10,19 @@
     "resetTodos": "node src/resetToZeroTodos.js",
     "test": "ava test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jjhelguero/todo-counter"
+  },
+  "keywords": [
+    "todo",
+    "counter"
+  ],
+  "author": "Joshua Helguero <jjhelguero@protonmail.com>",
+  "bugs": {
+    "url": "https://github.com/jjhelguero/todo-counter/issues"
+  },
+  "homepage": "https://github.com/jjhelguero/todo-counter",
   "ava": {
     "files": [
       "test/*-test.js"
