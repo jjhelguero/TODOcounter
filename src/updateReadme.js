@@ -1,13 +1,11 @@
 const fs = require('fs')
 const debug = require('debug')('updateReadMeTodoCounter')
 var dayjs = require('dayjs')
-
-
-// const todoRowRegex = /(?<todoRow>\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|)/gi
+const encoding = 'utf-8'
 
 function extractTodoRows(readMe) {
   debug('Extracting todo rows')
-  // const todoRowRegex = /\|<date\d+>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter\d+>(\d+)?\|/gi
+
   const todoRowRegex = /\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|/gi
   const matchedRows = (readMe || '').match(todoRowRegex) || []
   debug(`Found ${matchedRows.length} matches`)
@@ -15,37 +13,54 @@ function extractTodoRows(readMe) {
   return matchedRows
 }
 
-function updateTodoTable(readMe, data, rowArray, todoCount) {
-  // TODO add logic if latest todoCounter matches todoCount
-  const lastRow = rowArray[rowArray.length - 1]
+function checkTodoCountDifference(table, count) {
+  const lastRow = table[table.length - 1]
   const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
   const latestTodoCount = lastRow.match(lastTodoCountRegex).groups.count
-  const updateTodoTableBool = (latestTodoCount != todoCount)
+  debug(`Latest table todo count: ${latestTodoCount}\nFound todo count: ${count}`)
 
-  debug(`Latest table todo count: ${latestTodoCount}\nFound todo count: ${todoCount}`)
+  return (latestTodoCount != count)
+}
+function createNewTodoTable(arr, count) {
+  const d = new Date()
+  const date = dayjs(d).format('MM/DD/YY')
+  const newRow = `|<date>${date}|<todoCounter>${count}|`
+  const endTableTag = '</table>'
 
-  if (updateTodoTableBool) {
+  arr.push(newRow)
+  debug('Added new todo row')
+
+  arr.shift()
+  debug('Removed first(old) todo row')
+
+  arr.push(endTableTag)
+
+  return arr
+}
+
+function createNewReadMe(data, oldTable, count) {
+  const tableHeader = '| Date | Todo Count |\n| :---:| :---:|\n'
+  const startTableTagIndex = data.indexOf(tableHeader)
+  const removedTableReadMe = data.substring(0, startTableTagIndex)
+  const todoTableWithoutHeader = createNewTodoTable(oldTable, count).toString().replace(/\|,/g, '\|\n')
+  const newTodoTable = tableHeader.concat(todoTableWithoutHeader)
+
+  return removedTableReadMe.concat(newTodoTable)
+}
+
+function updateTodoTable(readMe, data, oldTodoTable, todoCount) {
+
+  const isTodoCountDifferent = checkTodoCountDifference(oldTodoTable, todoCount)
+
+  if (isTodoCountDifferent) {
     debug('Updating todo table')
 
-    const d = new Date()
-    const date = dayjs(d).format('MM/DD/YY')
-    const newRow = `|<date>${date}|<todoCounter>${todoCount}|`
-    const tableRegex = /(?<todoRow>\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|)/i
+    const newReadMe = createNewReadMe(data, oldTodoTable, todoCount)
 
-    rowArray.push(newRow)
-    debug('Added new todo row')
-
-    rowArray.shift()
-    debug('Removed first(old) todo row')
-
-    // TODO figure out how to get all table with regex and then replace
-    data.replace(tableRegex, rowArray)
-    console.log(data.replace(tableRegex, rowArray))
-    // TODO uncomment when above is fixed
-    // fs.writeFile(readMe, newValue, 'utf-8', function (err, data) {
-    //   if (err) throw err
-    //   debug('Todo table updated!')
-    // })
+    fs.writeFile(readMe, newReadMe, encoding, function (err, data) {
+      if (err) throw err
+      debug('ReadMe file updated!')
+    })
   } else {
     console.log('No change in todo count')
   }
@@ -56,7 +71,7 @@ function updateReadMeTodoCounter(tcounter) {
 
 
   debug(`Reading ${readmeFile} file`)
-  fs.readFile(readmeFile, 'utf-8', function (err, data) {
+  fs.readFile(readmeFile, encoding, function (err, data) {
     if (err) throw err;
 
     const todoRows = extractTodoRows(data)
