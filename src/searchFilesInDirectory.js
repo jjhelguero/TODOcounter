@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const util = require('util');
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
 
-const debug = require('debug')('filterFiles');
+const debug = require('debug')('filterFiles')
 
 /**
  * Utility function to get all files in given directory and subdirectories
@@ -14,25 +14,25 @@ const debug = require('debug')('filterFiles');
  */
 function getFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
-    console.log(`Specified directory: ${dir} does not exist`);
-    return;
+    debug(`Specified directory: ${dir} does not exist`)
+    return
   }
 
-  let files = [];
+  let files = []
   fs.readdirSync(dir).forEach((file) => {
-    const filePath = path.join(dir, file);
-    const stat = fs.lstatSync(filePath);
+    const filePath = path.join(dir, file)
+    const stat = fs.lstatSync(filePath)
 
     if (stat.isDirectory()) {
-      const nestedFiles = getFilesInDirectory(filePath, ext);
-      files = files.concat(nestedFiles);
+      const nestedFiles = getFilesInDirectory(filePath, ext)
+      files = files.concat(nestedFiles)
     } else {
       if (path.extname(file) === ext) {
-        files.push(filePath);
+        files.push(filePath)
       }
     }
-  });
-  return files;
+  })
+  return files
 }
 
 /**
@@ -42,27 +42,27 @@ function getFilesInDirectory(dir, ext) {
  * @returns {Number} returns total todo count in files
  */
 function getTodoCount(files) {
-  const regex = /\/{2}\s?todo\s?/;
-  const flags = 'ig';
-  let todoCounter = 0;
+  const regex = /\/{2}\s?todo\s?/
+  const flags = 'ig'
+  let todoCounter = 0
 
   files.forEach((file) => {
     // if (err) throw err
-    const fileContent = fs.readFileSync(file, { encoding: 'utf-8' });
-    const matcher = new RegExp(regex, flags);
-    const numMatches = (fileContent.match(matcher) || []).length;
+    const fileContent = fs.readFileSync(file, { encoding: 'utf-8' })
+    const matcher = new RegExp(regex, flags)
+    const numMatches = (fileContent.match(matcher) || []).length
 
-    debug(`Matcher is: ${matcher}`);
+    debug(`Matcher is: ${matcher}`)
 
     if (numMatches != 0) {
-      debug(`Found ${numMatches} todo comment(s) in ${file}`);
-      todoCounter += numMatches;
-      debug(`Todo count: ${todoCounter}`);
+      debug(`Found ${numMatches} todo comment(s) in ${file}`)
+      todoCounter += numMatches
+      debug(`Todo count: ${todoCounter}`)
     } else {
-      debug(`Found ${numMatches} todo comment(s) in ${file}`);
+      debug(`Found ${numMatches} todo comment(s) in ${file}`)
     }
-  });
-  return todoCounter;
+  })
+  return todoCounter
 }
 
 /**
@@ -74,17 +74,17 @@ function getTodoCount(files) {
  */
 function searchFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
-    console.log(`Specified directory: ${dir} does not exist`);
-    return;
+    debug(`Specified directory: ${dir} does not exist`)
+    return
   }
 
-  debug(`Searching for todos in ${dir}`);
+  debug(`Searching for todos in ${dir}`)
 
-  const files = getFilesInDirectory(dir, ext);
+  const files = getFilesInDirectory(dir, ext)
 
-  debug('Files found: \n' + util.inspect(files, { maxArrayLength: null }));
+  debug('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
 
-  return getTodoCount(files);
+  return getTodoCount(files)
 }
 
-(module.exports = searchFilesInDirectory), getTodoCount, getFilesInDirectory;
+(module.exports = searchFilesInDirectory), getTodoCount, getFilesInDirectory

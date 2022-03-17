@@ -72,7 +72,7 @@ function updateReadMeTodoCounter(tcounter) {
 
   debug(`Reading ${readmeFile} file`)
   fs.readFile(readmeFile, encoding, function (err, data) {
-    if (err) throw err;
+    if (err) throw err
 
     const todoRows = extractTodoRows(data)
 
