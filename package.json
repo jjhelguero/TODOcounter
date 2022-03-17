@@ -39,6 +39,7 @@
     "debug": "^4.3.3",
     "lazy-ass": "^2.0.3",
     "lint-staged": "^12.3.5",
+    "mock-fs": "^5.1.2",
     "prettier": "^2.5.1"
   },
   "devDependencies": {
