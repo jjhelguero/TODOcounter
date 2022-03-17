@@ -5,9 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "format": "prettier --write 'src/*.js'",
-    "updateTodos": "node src/index.js",
-    "addTodos": "node src/addOneMoreTodoToFiles.js",
-    "resetTodos": "node src/resetToZeroTodos.js",
+    "lint": "standard --verbose  src/*.js test/*.js",
     "test": "ava test"
   },
   "repository": {
@@ -43,6 +41,7 @@
     "prettier": "^2.5.1"
   },
   "devDependencies": {
-    "ava": "^4.1.0"
+    "ava": "^4.1.0",
+    "semantic-release": "^19.0.2"
   }
 }
