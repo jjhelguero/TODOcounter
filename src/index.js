@@ -12,5 +12,5 @@ function findAndUpdateTodoCounter(dir, ext) {
   la(is.number(currentTodos), 'expect todo counter to be a number', currentTodos)
   udpateReadMeTodoCounter(currentTodos)
 }
-findAndUpdateTodoCounter('test/files', '.js')
+
 module.exports = { findAndUpdateTodoCounter }
