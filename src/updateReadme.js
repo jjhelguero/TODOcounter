@@ -80,5 +80,4 @@ function updateReadMeTodoCounter(tcounter) {
   })
 }
 
-updateReadMeTodoCounter(1)
 module.exports = updateReadMeTodoCounter
