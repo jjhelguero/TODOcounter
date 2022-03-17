@@ -1,6 +1,4 @@
-This repo will scan files for `// TODO` comments and update the `TODO counter` in the `README.md`
-
-Current TODO counter: 2
+This repo will scan files for `// TODO` comments and update the following table.
 
 | Date | Todo Count |
 | :---:| :---:|
@@ -14,3 +12,4 @@ Current TODO counter: 2
 |<date>08/08/08|<todoCounter>8|
 |<date>09/09/09|<todoCounter>9|
 |<date>10/10/10|<todoCounter>10|
+</table>
