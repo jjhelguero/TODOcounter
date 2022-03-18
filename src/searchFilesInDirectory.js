@@ -12,7 +12,7 @@ const debug = require('debug')('filterFiles')
  * @param {String} ext file extenstion string
  * @returns {Array<string>} returns array of files with matching extension
  */
-function getFilesInDirectory(dir, ext) {
+function getFilesInDirectory (dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
@@ -41,7 +41,7 @@ function getFilesInDirectory(dir, ext) {
  * @param {Array<string>} files
  * @returns {Number} returns total todo count in files
  */
-function getTodoCount(files) {
+function getTodoCount (files) {
   const regex = /\/{2}\s?todo\s?/
   const flags = 'ig'
   let todoCounter = 0
@@ -72,7 +72,7 @@ function getTodoCount(files) {
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchFilesInDirectory(dir, ext) {
+function searchFilesInDirectory (dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
