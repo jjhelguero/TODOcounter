@@ -20,7 +20,13 @@ function extractTodoTable(readMe) {
   return matchedRows
 }
 
-
+/**
+ * Utiliy function to check if latest todo count in readme
+ * table does not match the found todo count
+ * @param {String} table todo table
+ * @param {Number} count found todo count
+ * @returns {Boolean} 
+ */
 function checkTodoCountDifference(table, count) {
   const lastRow = table[table.length - 1]
   const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
@@ -32,7 +38,12 @@ function checkTodoCountDifference(table, count) {
   return latestTodoCount != count
 }
 
-
+/**
+ * Utility function to create new todo table
+ * @param {Array<string>} arr 
+ * @param {Number} count 
+ * @returns {Array<string>}
+ */
 function createNewTodoTable(arr, count) {
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
@@ -50,7 +61,13 @@ function createNewTodoTable(arr, count) {
   return arr
 }
 
-
+/**
+ * Utilty function to create new Readme
+ * @param {File} data 
+ * @param {String} oldTable 
+ * @param {Number} count 
+ * @returns 
+ */
 function createNewReadMe(data, oldTable, count) {
   const tableHeader = '| Date | Todo Count |\n| :---:| :---:|\n'
   const startTableTagIndex = data.indexOf(tableHeader)
