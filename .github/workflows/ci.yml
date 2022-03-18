@@ -10,9 +10,6 @@ jobs:
       - name: NPM install
         uses: bahmutov/npm-install@v1
 
-      - name: Lint 🖌
-        run: npm run lint
-
       - name: Test 🧪
         run: npm test
 

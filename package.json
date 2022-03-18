@@ -1,6 +1,6 @@
 {
   "name": "todoCounter",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Count todo comments in given directory with filter ext",
   "main": "src/index.js",
   "scripts": {
