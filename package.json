@@ -1,12 +1,14 @@
 {
   "name": "todoCounter",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Count todo comments in given directory with filter ext",
   "main": "src/index.js",
   "scripts": {
     "format": "prettier --write 'src/*.js'",
     "lint": "standard --verbose  src/*.js test/*.js",
-    "test": "ava test"
+    "test": "ava test",
+    "semantic-release": "semantic-release",
+    "commit": "commit-wizard"
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,25 @@
   },
   "devDependencies": {
     "ava": "^4.1.0",
-    "semantic-release": "^19.0.2"
+    "pre-git": "^3.17.1",
+    "semantic-release": "^19.0.2",
+    "standard": "^16.0.4"
+  },
+  "release": {
+    "analyzeCommits": "simple-commit-message"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": [
+        "simple"
+      ],
+      "pre-commit": [
+        "npm run test"
+      ],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": [],
+      "allow-untracked-files": true
+    }
   }
 }
