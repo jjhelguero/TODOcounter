@@ -4,7 +4,10 @@ const getFilesInDirectory = require('../src/searchFilesInDirectory')
 const searchFilesInDirectory = require('../src/searchFilesInDirectory')
 
 test('getFilesInDirectory returns number of files', t => {
-    t.true(typeof getFilesInDirectory('test/files', '.js') == 'number')
+    mock({
+        'fakeDir/mockFile1.js': '//todo\n// todo',
+    })
+    t.true(typeof getFilesInDirectory('fakeDir', '.js') == 'number')
 })
 
 test('getFilesInDirectory should return empty string when nullish value', t => {
