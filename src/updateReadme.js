@@ -3,7 +3,13 @@ const debug = require('debug')('updateReadMeTodoCounter')
 const dayjs = require('dayjs')
 const encoding = 'utf-8'
 
-function extractTodoRows (readMe) {
+/**
+ * Utility funciton to extract todo table from existing
+ * README in current directory
+ * @param {File} readMe 
+ * @returns 
+ */
+function extractTodoTable(readMe) {
   debug('Extracting todo rows')
 
   const todoRowRegex =
@@ -14,7 +20,8 @@ function extractTodoRows (readMe) {
   return matchedRows
 }
 
-function checkTodoCountDifference (table, count) {
+
+function checkTodoCountDifference(table, count) {
   const lastRow = table[table.length - 1]
   const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
   const latestTodoCount = lastRow.match(lastTodoCountRegex).groups.count
@@ -24,7 +31,9 @@ function checkTodoCountDifference (table, count) {
 
   return latestTodoCount != count
 }
-function createNewTodoTable (arr, count) {
+
+
+function createNewTodoTable(arr, count) {
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   const newRow = `|<date>${date}|<todoCounter>${count}|`
@@ -41,7 +50,8 @@ function createNewTodoTable (arr, count) {
   return arr
 }
 
-function createNewReadMe (data, oldTable, count) {
+
+function createNewReadMe(data, oldTable, count) {
   const tableHeader = '| Date | Todo Count |\n| :---:| :---:|\n'
   const startTableTagIndex = data.indexOf(tableHeader)
   const removedTableReadMe = data.substring(0, startTableTagIndex)
@@ -53,7 +63,8 @@ function createNewReadMe (data, oldTable, count) {
   return removedTableReadMe.concat(newTodoTable)
 }
 
-function updateTodoTable (readMe, data, oldTodoTable, todoCount) {
+
+function updateTodoTable(readMe, data, oldTodoTable, todoCount) {
   const isTodoCountDifferent = checkTodoCountDifference(
     oldTodoTable,
     todoCount
@@ -73,16 +84,17 @@ function updateTodoTable (readMe, data, oldTodoTable, todoCount) {
   }
 }
 
-function updateReadMeTodoCounter (tcounter) {
+
+function updateReadMeTodoCounter(tcounter) {
   const readmeFile = 'README.md'
 
   debug(`Reading ${readmeFile} file`)
   fs.readFile(readmeFile, encoding, function (err, data) {
     if (err) throw err
 
-    const todoRows = extractTodoRows(data)
+    const todoTable = extractTodoTable(data)
 
-    updateTodoTable(readmeFile, data, todoRows, tcounter)
+    updateTodoTable(readmeFile, data, todoTable, tcounter)
   })
 }
 
