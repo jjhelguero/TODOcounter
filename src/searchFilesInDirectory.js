@@ -42,7 +42,7 @@ function getFilesInDirectory(dir, ext) {
  * @returns {Number} returns total todo count in files
  */
 function getTodoCount(files) {
-  const regex = /\/{2}\s?todo\s?/
+  const regex = /\/{2}\s?todo(\s|:)/
   const flags = 'ig'
   let todoCounter = 0
 
