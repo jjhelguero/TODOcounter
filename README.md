@@ -1,5 +1,5 @@
 # todo-counter
-> Gets count of all todo comments in a given directory with a given extension
+> count todo comments directory
 
 
 ## Install
@@ -12,9 +12,16 @@ The following will search for todo comments in `foo/bar` directory and a subdire
 
     npx todo-counter 'foo/bar' '.js'
 
+Examples of TODO's that will be counted:
+```
+// TODO: This thing needs fixing
+//todo: this is be counted
+// todo this will be counted
+```
 
-## Requirements
-The following table structure must be included in `README` file.
+
+## Expects
+The following table structure is expected in your `README` file.
 
 | Date | Todo Count |
 | :---:| :---:|
