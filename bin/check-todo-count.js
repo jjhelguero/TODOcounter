@@ -16,6 +16,6 @@ const directory = process.argv[2]
 const fileExt = process.argv.slice(3)
 debug('directory and file extension: %s - %o', directory, fileExt)
 
-const checkTodo = require('..').findAndUpdateTodoCounter
-la(is.fn(checkTodo), 'expected function', checkTodo)
-findAndUpdateTodoCounter(directory, fileExt)
+const countTodos = require('..').countTodos
+la(is.fn(countTodos), 'expected function', countTodos)
+countTodos(directory, fileExt)
