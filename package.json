@@ -11,7 +11,7 @@
     "commit": "commit-wizard"
   },
   "bin": {
-    "count-todos": "bin/count-todos.js"
+    "todo-counter": "bin/todo-counter.js"
   },
   "repository": {
     "type": "git",
