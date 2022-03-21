@@ -1,4 +1,4 @@
-const la = require('lazy-ass')
+const { la } = require('lazy-ass')
 const is = require('check-more-types')
 const searchFilesInDirectory = require('./searchFilesInDirectory')
 const udpateReadMeTodoCounter = require('./updateReadme')

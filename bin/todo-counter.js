@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const debug = require('debug')('todo-counter')
-const la = require('lazy-ass')
+const { la } = require('lazy-ass')
 const is = require('check-more-types')
 
 require('simple-bin-help')({
