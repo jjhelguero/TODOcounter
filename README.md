@@ -4,13 +4,13 @@
 
 ## Install
 
-    npm install -d count-todos
+    npm install -d todo-counter
 
 
 ## Use
 The following will search for todo comments in `foo/bar` directory and a subdirectories in files matching the `.js` extension.
 
-    npx count-todos 'foo/bar' '.js'
+    npx todo-counter 'foo/bar' '.js'
 
 
 ## Requirements
