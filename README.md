@@ -1,5 +1,5 @@
 # todo-counter
-> count todo comments directory
+> count todo comments in specified directory
 
 
 ## Install
