@@ -6,10 +6,10 @@ const encoding = 'utf-8'
 /**
  * Utility funciton to extract todo table from existing
  * README in current directory
- * @param {File} readMe 
- * @returns 
+ * @param {File} readMe
+ * @returns
  */
-function extractTodoTable(readMe) {
+function extractTodoTable (readMe) {
   debug('Extracting todo rows')
 
   const todoRowRegex =
@@ -25,9 +25,9 @@ function extractTodoTable(readMe) {
  * table does not match the found todo count
  * @param {String} table todo table
  * @param {Number} count found todo count
- * @returns {Boolean} 
+ * @returns {Boolean}
  */
-function checkTodoCountDifference(table, count) {
+function checkTodoCountDifference (table, count) {
   const lastRow = table[table.length - 1]
   const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
   const latestTodoCount = lastRow.match(lastTodoCountRegex).groups.count
@@ -40,11 +40,11 @@ function checkTodoCountDifference(table, count) {
 
 /**
  * Utility function to create new todo table
- * @param {Array<string>} arr 
- * @param {Number} count 
+ * @param {Array<string>} arr
+ * @param {Number} count
  * @returns {Array<string>}
  */
-function createNewTodoTable(arr, count) {
+function createNewTodoTable (arr, count) {
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   const newRow = `|<date>${date}|<todoCounter>${count}|`
@@ -63,12 +63,12 @@ function createNewTodoTable(arr, count) {
 
 /**
  * Utilty function to create new Readme
- * @param {File} data 
- * @param {String} oldTable 
- * @param {Number} count 
- * @returns 
+ * @param {File} data
+ * @param {String} oldTable
+ * @param {Number} count
+ * @returns
  */
-function createNewReadMe(data, oldTable, count) {
+function createNewReadMe (data, oldTable, count) {
   const tableHeader = '| Date | Todo Count |\n| :---:| :---:|\n'
   const startTableTagIndex = data.indexOf(tableHeader)
   const removedTableReadMe = data.substring(0, startTableTagIndex)
@@ -80,8 +80,7 @@ function createNewReadMe(data, oldTable, count) {
   return removedTableReadMe.concat(newTodoTable)
 }
 
-
-function updateTodoTable(readMe, data, oldTodoTable, todoCount) {
+function updateTodoTable (readMe, data, oldTodoTable, todoCount) {
   const isTodoCountDifferent = checkTodoCountDifference(
     oldTodoTable,
     todoCount
@@ -101,8 +100,7 @@ function updateTodoTable(readMe, data, oldTodoTable, todoCount) {
   }
 }
 
-
-function updateReadMeTodoCounter(tcounter) {
+function updateReadMeTodoCounter (tcounter) {
   const readmeFile = 'README.md'
 
   debug(`Reading ${readmeFile} file`)
