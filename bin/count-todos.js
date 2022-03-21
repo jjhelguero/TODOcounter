@@ -3,11 +3,10 @@
 const debug = require('debug')('count-todos')
 const la = require('lazy-ass')
 const is = require('check-more-types')
-const join = require('path').join
 
 require('simple-bin-help')({
     minArguments: 2,
-    packagePath: join(__dirname, '..', 'package.json'),
+    packagePath: __dirname + '/../package.json',
     help: 'use    : count-todos <directory> <file extension>\n' +
         'example: count-todos "tests/files" ".js"'
 })
