@@ -10,6 +10,9 @@
     "semantic-release": "semantic-release",
     "commit": "commit-wizard"
   },
+  "bin": {
+    "count-todos": "bin/count-todos.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jjhelguero/todo-counter"
