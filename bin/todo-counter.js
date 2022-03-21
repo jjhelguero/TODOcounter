@@ -16,5 +16,5 @@ const fileExt = process.argv.slice(3)
 debug('directory and file extension: %s - %o', directory, fileExt)
 
 const todoCounter = require('..').todoCounter
-la(is.fn(todoCounter), 'expected function', todoCounter)
+// la(is.fn(todoCounter), 'expected function', todoCounter)
 todoCounter(directory, fileExt)
