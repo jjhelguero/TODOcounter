@@ -48,9 +48,9 @@
   },
   "devDependencies": {
     "ava": "^4.1.0",
-    "pre-git": "^0.0.16",
-    "semantic-release": "^15.7.2",
-    "standard": "^5.0.0"
+    "pre-git": "^3.17.1",
+    "semantic-release": "^19.0.2",
+    "standard": "^16.0.4"
   },
   "release": {
     "analyzeCommits": "simple-commit-message"
