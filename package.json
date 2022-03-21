@@ -1,5 +1,5 @@
 {
-  "name": "count-todos",
+  "name": "todo-counter",
   "version": "1.0.0",
   "description": "Count todo comments in given directory with filter ext",
   "main": "src/index.js",
@@ -44,13 +44,13 @@
     "lint-staged": "^12.3.5",
     "mock-fs": "^5.1.2",
     "prettier": "^2.5.1",
-    "simple-bin-help": "^1.7.7"
+    "simple-bin-help": "^1.6.0"
   },
   "devDependencies": {
     "ava": "^4.1.0",
-    "pre-git": "^3.17.1",
-    "semantic-release": "^19.0.2",
-    "standard": "^16.0.4"
+    "pre-git": "^0.0.16",
+    "semantic-release": "^15.7.2",
+    "standard": "^5.0.0"
   },
   "release": {
     "analyzeCommits": "simple-commit-message"

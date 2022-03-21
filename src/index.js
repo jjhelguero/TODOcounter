@@ -3,7 +3,7 @@ const is = require('check-more-types')
 const searchFilesInDirectory = require('./searchFilesInDirectory')
 const udpateReadMeTodoCounter = require('./updateReadme')
 
-function countTodos(dir, ext) {
+function todoCounter(dir, ext) {
   la(is.unemptyString(dir), 'expect search directory', dir)
   la(is.unemptyString(ext), 'expect file filter', ext)
 
@@ -17,4 +17,4 @@ function countTodos(dir, ext) {
   udpateReadMeTodoCounter(currentTodos)
 }
 
-module.exports = { countTodos }
+module.exports = { todoCounter }
