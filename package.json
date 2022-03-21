@@ -1,5 +1,5 @@
 {
-  "name": "todo-counter",
+  "name": "count-todos",
   "version": "1.0.0",
   "description": "Count todo comments in given directory with filter ext",
   "main": "src/index.js",
