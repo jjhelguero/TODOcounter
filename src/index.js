@@ -1,15 +1,15 @@
-const { la } = require('lazy-ass')
+const { lazyAss } = require('lazy-ass')
 const is = require('check-more-types')
 const searchFilesInDirectory = require('./searchFilesInDirectory')
 const udpateReadMeTodoCounter = require('./updateReadme')
 
-function todoCounter (dir, ext) {
-  la(is.unemptyString(dir), 'expect search directory', dir)
-  la(is.unemptyString(ext), 'expect file filter', ext)
+function todoCounter(dir, ext) {
+  lazyAss(is.unemptyString(dir), 'expect search directory', dir)
+  lazyAss(is.unemptyString(ext), 'expect file filter', ext)
 
   const currentTodos = searchFilesInDirectory(dir, ext)
 
-  la(
+  lazyAss(
     is.number(currentTodos),
     'expect todo counter to be a number',
     currentTodos

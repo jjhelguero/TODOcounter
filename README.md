@@ -21,7 +21,8 @@ Examples of TODO's that will be counted:
 
 
 ## Expects
-The following table structure is expected in your `README` file.
+The following table structure is expected in your `README` file with `Date` cells including a `<date>` tag and the `Todo Count`
+cells including a `<todoCounter>` tag.
 
 | Date | Todo Count |
 | :---:| :---:|
