@@ -48,15 +48,12 @@ function createNewTodoTable(arr, count) {
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   const newRow = `|<date>${date}|<todoCounter>${count}|`
-  const endTableTag = '</table>'
 
   arr.push(newRow)
   debug('Added new todo row')
 
   arr.shift()
   debug('Removed first(old) todo row')
-
-  arr.push(endTableTag)
 
   return arr
 }
