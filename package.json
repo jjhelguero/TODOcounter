@@ -7,6 +7,7 @@
     "format": "prettier --write 'src/*.js'",
     "lint": "standard --verbose  src/*.js test/*.js",
     "test": "ava test",
+    "demo": "node ./bin/todo-counter.js 'demo' '.js'",
     "semantic-release": "semantic-release",
     "commit": "commit-wizard"
   },
