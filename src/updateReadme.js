@@ -12,8 +12,7 @@ const encoding = 'utf-8'
 function extractTodoTable(readMe) {
   debug('Extracting todo rows')
 
-  const todoRowRegex =
-    /\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|/gi
+  const todoRowRegex = /\|<date>(\d{2}\/\d{2}\/\d{2})?\|<todoCounter>(\d+)?\|/gi
   const matchedRows = (readMe || '').match(todoRowRegex) || []
   debug(`Found ${matchedRows.length} matches`)
 
@@ -32,7 +31,7 @@ function checkTodoCountDifference(table, count) {
   const lastTodoCountRegex = /<todoCounter>(?<count>\d+)/
   const latestTodoCount = lastRow.match(lastTodoCountRegex).groups.count
   debug(
-    `Latest table todo count: ${latestTodoCount}\nFound todo count: ${count}`
+    `Latest table todo count: ${latestTodoCount}\nFound todo count: ${count}`,
   )
 
   return latestTodoCount != count
@@ -80,10 +79,7 @@ function createNewReadMe(data, oldTable, count) {
 }
 
 function updateTodoTable(readMe, data, oldTodoTable, todoCount) {
-  const isTodoCountDifferent = checkTodoCountDifference(
-    oldTodoTable,
-    todoCount
-  )
+  const isTodoCountDifferent = checkTodoCountDifference(oldTodoTable, todoCount)
 
   if (isTodoCountDifferent) {
     debug('Updating todo table')
@@ -112,4 +108,8 @@ function updateReadMeTodoCounter(tcounter) {
   })
 }
 
-module.exports = updateReadMeTodoCounter
+;(module.exports = updateReadMeTodoCounter),
+  extractTodoTable,
+  checkTodoCountDifference,
+  createNewTodoTable,
+  updateTodoTable

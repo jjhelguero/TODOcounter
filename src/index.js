@@ -13,7 +13,7 @@ function todoCounter(dir, ext) {
   lazyAss(
     is.number(currentTodos),
     'expect todo counter to be a number',
-    currentTodos
+    currentTodos,
   )
   udpateReadMeTodoCounter(currentTodos)
 }
