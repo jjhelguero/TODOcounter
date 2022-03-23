@@ -73,7 +73,7 @@ function createNewReadMe(data, oldTable, count) {
   const todoTableWithoutHeader = createNewTodoTable(oldTable, count)
     .toString()
     .replace(/\|,/g, '|\n')
-  const newTodoTable = tableHeader.concat(todoTableWithoutHeader)
+  const newTodoTable = tableHeader.concat(todoTableWithoutHeader, '\n')
 
   return extractedTodoTable.concat(newTodoTable)
 }
@@ -108,7 +108,7 @@ function updateReadMeTodoCounter(tcounter) {
   })
 }
 
-;(module.exports = updateReadMeTodoCounter),
+; (module.exports = updateReadMeTodoCounter),
   extractTodoTable,
   checkTodoCountDifference,
   createNewTodoTable,
