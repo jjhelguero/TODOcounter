@@ -1,7 +1,7 @@
 const test = require('ava')
 const mock = require('mock-fs')
-const getFilesInDirectory = require('../src/searchFilesInDirectory')
-const searchFilesInDirectory = require('../src/searchFilesInDirectory')
+const getFilesInDirectory = require('../src/searchTodosInFilesInDirectory')
+const searchTodosInFilesInDirectory = require('../src/searchTodosInFilesInDirectory')
 
 test('getFilesInDirectory returns number of files', (t) => {
     mock({
@@ -26,7 +26,7 @@ test('getFilesInDirectory should return empty string when nullish value', (t) =>
     t.is(getFilesInDirectory('invalidDirect', validExt), undefined)
 })
 
-test('searchFilesInDirectory returns a number', (t) => {
+test('searchTodosInFilesInDirectory returns a number', (t) => {
     mock({
         'fakeDir': {
             'mockFile1.js': '//todo\n// todo',
@@ -37,14 +37,14 @@ test('searchFilesInDirectory returns a number', (t) => {
             'mockFile.java': ''
         }
     })
-    t.true(typeof searchFilesInDirectory('fakeDir', '.js') === 'number')
+    t.true(typeof searchTodosInFilesInDirectory('fakeDir', '.js') === 'number')
 })
 
-test('searchFilesInDirectory should return empty string when nullish value', (t) => {
+test('searchTodosInFilesInDirectory should return empty string when nullish value', (t) => {
     const validExt = '.js'
     const nullDirectory = null
     const undefinedDirectory = undefined
-    t.is(searchFilesInDirectory(nullDirectory, validExt), undefined)
-    t.is(searchFilesInDirectory(undefinedDirectory, validExt), undefined)
-    t.is(searchFilesInDirectory('invalidDirect', validExt), undefined)
+    t.is(searchTodosInFilesInDirectory(nullDirectory, validExt), undefined)
+    t.is(searchTodosInFilesInDirectory(undefinedDirectory, validExt), undefined)
+    t.is(searchTodosInFilesInDirectory('invalidDirect', validExt), undefined)
 })

@@ -71,7 +71,7 @@ function getTodoCount(files) {
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchFilesInDirectory(dir, ext) {
+function searchTodosInFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
@@ -86,4 +86,4 @@ function searchFilesInDirectory(dir, ext) {
   return getTodoCount(files)
 }
 
-;(module.exports = searchFilesInDirectory), getTodoCount, getFilesInDirectory
+;(module.exports = searchTodosInFilesInDirectory), getTodoCount, getFilesInDirectory
