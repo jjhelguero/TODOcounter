@@ -1,38 +1,7 @@
 const fs = require('fs')
-const path = require('path')
 const util = require('util')
-
-const debug = require('debug')('filterFiles')
-/**
- * Utility function to get all files in given directory and subdirectories
- * with matching ext and returns an array of strings for matching
- * files
- * @param {String} dir directory string
- * @param {String} ext file extenstion string
- * @returns {Array<string>} returns array of files with matching extension
- */
-function getFilesInDirectory(dir, ext) {
-  if (!fs.existsSync(dir)) {
-    debug(`Specified directory: ${dir} does not exist`)
-    return
-  }
-
-  let files = []
-  fs.readdirSync(dir).forEach((file) => {
-    const filePath = path.join(dir, file)
-    const stat = fs.lstatSync(filePath)
-
-    if (stat.isDirectory()) {
-      const nestedFiles = getFilesInDirectory(filePath, ext)
-      files = files.concat(nestedFiles)
-    } else {
-      if (path.extname(file) == ext) {
-        files.push(filePath)
-      }
-    }
-  })
-  return files
-}
+const getFilesInDirectory = require('./utils')
+const debug = require('debug')('searchTodosInFilesInDirectory')
 
 /**
  * Utility function to get all todo comment counts in passed files array
@@ -87,5 +56,4 @@ function searchTodosInFilesInDirectory(dir, ext) {
 }
 
 ;(module.exports = searchTodosInFilesInDirectory),
-  getTodoCount,
-  getFilesInDirectory
+  getTodoCount

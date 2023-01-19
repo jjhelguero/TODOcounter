@@ -1,9 +1,9 @@
 const test = require('ava')
 const mock = require('mock-fs')
-const getFilesInDirectory = require('../src/searchFilesInDirectory')
-const searchTodosInFilesInDirectory = require('../src/searchFilesInDirectory')
+const getFilesInDirectory = require('../src/utils')
+const searchTodosInFilesInDirectory = require('../src/searchTodosInFilesInDirectory')
 
-test('getFilesInDirectory returns number of files', (t) => {
+test('getFilesInDirectory returns object of files', (t) => {
   mock({
     fakeDir: {
       'mockFile1.js': '//todo\n// todo',
@@ -14,7 +14,7 @@ test('getFilesInDirectory returns number of files', (t) => {
       'mockFile.java': '',
     },
   })
-  t.true(typeof getFilesInDirectory('fakeDir', '.js') === 'number')
+  t.true(typeof getFilesInDirectory('fakeDir', '.js') === 'object')
 })
 
 test('getFilesInDirectory should return empty string when nullish value', (t) => {
