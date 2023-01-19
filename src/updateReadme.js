@@ -108,7 +108,7 @@ function updateReadMeTodoCounter(tcounter) {
   })
 }
 
-(module.exports = updateReadMeTodoCounter),
+;(module.exports = updateReadMeTodoCounter),
   extractTodoTable,
   checkTodoCountDifference,
   createNewTodoTable,
