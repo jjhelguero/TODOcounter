@@ -86,4 +86,6 @@ function searchTodosInFilesInDirectory(dir, ext) {
   return getTodoCount(files)
 }
 
-;(module.exports = searchTodosInFilesInDirectory), getTodoCount, getFilesInDirectory
+;(module.exports = searchTodosInFilesInDirectory),
+  getTodoCount,
+  getFilesInDirectory
