@@ -18,5 +18,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Release Drafter
-        uses: release-drafter/release-drafter@v5.21.1
