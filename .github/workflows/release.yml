@@ -1,14 +1,15 @@
 name: Release Package
-
 on:
   push:
     branches:
       - master
-
 jobs:
   release_package:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v3
         env:
