@@ -9,9 +9,6 @@ jobs:
   release_package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v3
         env:
