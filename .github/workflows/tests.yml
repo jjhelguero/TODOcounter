@@ -1,0 +1,17 @@
+name: ci
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: NPM install
+        uses: bahmutov/npm-install@v1
+
+      - name: Test 🧪
+        run: npm test
