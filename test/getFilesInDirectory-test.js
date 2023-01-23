@@ -18,19 +18,19 @@ test('getFilesInDirectory returns object of more than 1 file', (t) => {
   t.true(getFilesInDirectory('fakeDir', '.js').length >= 1)
 })
 
-test('getFilesInDirectory should return empty string with empty directory', (t) => {
+test('getFilesInDirectory should return empty string with null directory', (t) => {
   const validExt = '.js'
   const nullDirectory = null
   t.is(getFilesInDirectory(nullDirectory, validExt), undefined)
 })
 
-test('getFilesInDirectory should return empty string when directory is undefined', (t) => {
+test('getFilesInDirectory should return empty string with undefined directory', (t) => {
   const validExt = '.js'
   const undefinedDirectory = undefined
   t.is(getFilesInDirectory(undefinedDirectory, validExt), undefined)
 })
 
-test('getFilesInDirectory should return empty string when directory is invalid', (t) => {
+test('getFilesInDirectory should return empty string with invalid directory', (t) => {
   const validExt = '.js'
   t.is(getFilesInDirectory('invalidDirect', validExt), undefined)
 })
