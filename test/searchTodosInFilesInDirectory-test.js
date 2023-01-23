@@ -33,11 +33,20 @@ test('searchTodosInFilesInDirectory returns count of 3', (t) => {
 
 })
 
-test('searchTodosInFilesInDirectory should return empty string when nullish value', (t) => {
+test('searchTodosInFilesInDirectory should return empty string with null directory', (t) => {
   const validExt = '.js'
   const nullDirectory = null
-  const undefinedDirectory = undefined
   t.is(searchTodosInFilesInDirectory(nullDirectory, validExt), undefined)
+})
+
+test('searchTodosInFilesInDirectory should return empty string with undefined directory', (t) => {
+  const validExt = '.js'
+  const undefinedDirectory = undefined
   t.is(searchTodosInFilesInDirectory(undefinedDirectory, validExt), undefined)
+})
+
+
+test('searchTodosInFilesInDirectory should return empty string with invalide directory', (t) => {
+  const validExt = '.js'
   t.is(searchTodosInFilesInDirectory('invalidDirect', validExt), undefined)
 })
