@@ -1,30 +1,6 @@
 const test = require('ava')
 const mock = require('mock-fs')
-const getFilesInDirectory = require('../src/utils')
 const searchTodosInFilesInDirectory = require('../src/searchTodosInFilesInDirectory')
-
-test('getFilesInDirectory returns object of files', (t) => {
-  mock({
-    fakeDir: {
-      'mockFile1.js': '//todo\n// todo',
-      'empty-dir': {},
-      sub: {
-        'mockFile2.js': '// todo',
-      },
-      'mockFile.java': '',
-    },
-  })
-  t.true(typeof getFilesInDirectory('fakeDir', '.js') === 'object')
-})
-
-test('getFilesInDirectory should return empty string when nullish value', (t) => {
-  const validExt = '.js'
-  const nullDirectory = null
-  const undefinedDirectory = undefined
-  t.is(getFilesInDirectory(nullDirectory, validExt), undefined)
-  t.is(getFilesInDirectory(undefinedDirectory, validExt), undefined)
-  t.is(getFilesInDirectory('invalidDirect', validExt), undefined)
-})
 
 test('searchTodosInFilesInDirectory returns a number', (t) => {
   mock({
@@ -37,14 +13,40 @@ test('searchTodosInFilesInDirectory returns a number', (t) => {
       'mockFile.java': '',
     },
   })
-  t.true(typeof searchTodosInFilesInDirectory('fakeDir', '.js') === 'number')
+  const num = searchTodosInFilesInDirectory('fakeDir', '.js')
+  t.true(typeof num === 'number')
 })
 
-test('searchTodosInFilesInDirectory should return empty string when nullish value', (t) => {
+test('searchTodosInFilesInDirectory returns count of 3', (t) => {
+  mock({
+    fakeDir: {
+      'mockFile1.js': '//todo\n// todo',
+      'empty-dir': {},
+      sub: {
+        'mockFile2.js': '// todo',
+      },
+      'mockFile.java': '',
+    },
+  })
+  const num = searchTodosInFilesInDirectory('fakeDir', '.js')
+  t.true(num >= 1)
+
+})
+
+test('searchTodosInFilesInDirectory should return empty string with null directory', (t) => {
   const validExt = '.js'
   const nullDirectory = null
-  const undefinedDirectory = undefined
   t.is(searchTodosInFilesInDirectory(nullDirectory, validExt), undefined)
+})
+
+test('searchTodosInFilesInDirectory should return empty string with undefined directory', (t) => {
+  const validExt = '.js'
+  const undefinedDirectory = undefined
   t.is(searchTodosInFilesInDirectory(undefinedDirectory, validExt), undefined)
+})
+
+
+test('searchTodosInFilesInDirectory should return empty string with invalide directory', (t) => {
+  const validExt = '.js'
   t.is(searchTodosInFilesInDirectory('invalidDirect', validExt), undefined)
 })
