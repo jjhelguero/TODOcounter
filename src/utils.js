@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const debug = require('debug')('utils')
-const todoRegex = /\/{2}\s?todo(\s|:)?/
 
 /**
  * Utility function to get all todo comment counts in passed files array
@@ -9,14 +8,14 @@ const todoRegex = /\/{2}\s?todo(\s|:)?/
  * @param {Array<string>} files
  * @returns {Number} returns total todo count in files
  */
-function getCount(files) {
+function getCount(files, regex) {
   const flags = 'ig'
   let count = 0
 
    for( const file of files ) {
     // if (err) throw err
     const fileContent = fs.readFileSync(file, { encoding: 'utf-8' })
-    const matcher = new RegExp(todoRegex, flags)
+    const matcher = new RegExp(regex, flags)
     const numMatches = (fileContent.match(matcher) || []).length
 
     debug(`Matcher is: ${matcher}`)
@@ -63,4 +62,4 @@ function getFilesInDirectory(dir, ext) {
   return files
 }
 
-;(module.exports = {getFilesInDirectory, getCount}), todoRegex
+;(module.exports = {getFilesInDirectory, getCount})
