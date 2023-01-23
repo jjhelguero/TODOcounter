@@ -18,4 +18,18 @@ function todoCounter(dir, ext) {
   udpateReadMeTodoCounter(currentTodos)
 }
 
-module.exports = { todoCounter }
+function skippedTestCounter(dir, ext) {
+  lazyAss(is.unemptyString(dir), 'expect search directory', dir)
+  lazyAss(check.arrayOf(check.unemptyString, ext), 'expect file filter', ext)
+
+  const skippedTests = searchFilesInDirectory(dir, ext)
+
+  lazyAss(
+    is.number(skippedTests),
+    'expect skipped tests to be a number',
+    skippedTests,
+  )
+  udpateReadMeTodoCounter(skippedTests)
+}
+
+module.exports = { todoCounter, skippedTestCounter }
