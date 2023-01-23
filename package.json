@@ -53,9 +53,6 @@
     "semantic-release": "^19.0.2",
     "standard": "^16.0.4"
   },
-  "release": {
-    "analyzeCommits": "simple-commit-message"
-  },
   "config": {
     "pre-git": {
       "commit-msg": [
