@@ -46,7 +46,7 @@ test('searchTodosInFilesInDirectory should return empty string with undefined di
 })
 
 
-test('searchTodosInFilesInDirectory should return empty string with invalide directory', (t) => {
+test('searchTodosInFilesInDirectory should return empty string with invalid directory', (t) => {
   const validExt = '.js'
   t.is(searchTodosInFilesInDirectory('invalidDirect', validExt), undefined)
 })
