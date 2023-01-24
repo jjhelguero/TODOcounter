@@ -56,6 +56,12 @@ function extractTableFromReadme(readMe, countType) {
  * @returns {Boolean}
  */
 function checkCounterDifference(table, count, countType) {
+  // console.log(typeof count)
+  // console.log(typeof countType)
+  if(!Array.isArray(table)) throw new Error(`${table} is not an array`)
+  // if(typeof count === 'number') throw new Error(`${count} is not a number`)
+  // if(typeof countType === 'string') throw new Error(`${countType} is not a string`)
+  
   let lastCountRegex
   const lastRow = table[table.length - 1]
   if(countType == COUNT_TYPE.TODO.type) {
