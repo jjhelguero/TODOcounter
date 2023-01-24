@@ -9,11 +9,11 @@ const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skipped
 const COUNT_TYPE = {
   TODO: {
     type: 'todo',
-    tableTag: 'todoCounter'
+    tableHeader: 'todoCounter'
   },
   SKIP: {
     type: 'skipped',
-    tableTag: 'skippedTestsCounter'
+    tableHeader: 'skippedTestsCounter'
   }
 }
 
@@ -55,9 +55,14 @@ function extractTableFromReadme(readMe, countType) {
  * @param {String} tableHeader
  * @returns {Boolean}
  */
-function checkCounterDifference(table, count, tableHeader) {
+function checkCounterDifference(table, count, countType) {
+  let lastCountRegex
   const lastRow = table[table.length - 1]
-  const lastCountRegex = new RegExp(`<${tableHeader}>(?<count>\d+)`)
+  if(countType == COUNT_TYPE.TODO.type) {
+    lastCountRegex = /<todoCounter>(?<count>\d+)/
+  } else if(countType == COUNT_TYPE.SKIP.type) {
+    lastCountRegex = /<skippedCounter>(?<count>\d+)/
+  }
   const latestCount = lastRow.match(lastCountRegex)?.groups?.count
   debug(
     `Latest table todo count: ${latestCount}\nFound todo count: ${count}`,
