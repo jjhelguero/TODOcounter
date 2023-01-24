@@ -1,6 +1,9 @@
 const dayjs = require('dayjs')
 const debug = require('debug')('updateReadMeTodoCounter')
 const fs = require('fs')
+const util = require('util')
+
+const FILE_ENCODING = 'utf-8'
 const todoRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<todoCounter>\d+\s+\|)/gi
 const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skippedCounter>\d+\s+\|)/gi
 const COUNT_TYPE = {
@@ -23,9 +26,13 @@ function extractTableFromReadme(readMe, countType) {
     rowMatcher = todoRowMatcher
   } else if (countType == COUNT_TYPE.SKIP) {
     rowMatcher = skippedRowMatcher
+  } else {
+    throw new Error(`${countType} is not one of ${util.inspect(COUNT_TYPE)}`)
   }
 
-  const file = fs.readFileSync(readMe, 'utf-8')
+  const file = fs.readFileSync(readMe, FILE_ENCODING, function(err) {
+    if (err) { throw err }
+  })
   const matchedRows = file.match(rowMatcher) || []
 
   debug(`Found ${matchedRows.length} matches`)
@@ -120,4 +127,11 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   }
 }
 
-;(module.exports = {extractTableFromReadme, checkCounterDifference, createNewReadMe, maybeUpdateReadmeTable}, COUNT_TYPE)
+;(module.exports = {
+  extractTableFromReadme, 
+  checkCounterDifference, 
+  createNewReadMe, 
+  maybeUpdateReadmeTable, 
+  COUNT_TYPE, 
+  FILE_ENCODING
+})
