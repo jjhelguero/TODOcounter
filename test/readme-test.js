@@ -18,6 +18,21 @@ test('extractTableFromReadme matches 2 todo counter rows', (t) => {
     t.true(extractTableFromReadme('mockFile1.md', COUNT_TYPE.TODO) === 2)
 })
 
+test('extractTableFromReadme for skippedCounter returns a number', (t) => {
+    mock({ 
+        'mockFile1.md': '| <date>01/01/01 | <skippedCounter>1  |',
+    })
+    t.true(typeof extractTableFromReadme('mockFile1.md', COUNT_TYPE.SKIP) === 'number')
+})
+
+test('extractTableFromReadme matches 2 skipped counter rows', (t) => {
+    mock({ 
+        'mockFile1.md': `| <date>01/01/01 | <skippedCounter>1  |
+        | <date>02/02/02 | <skippedCounter>2  |`,
+    })
+    t.true(extractTableFromReadme('mockFile1.md', COUNT_TYPE.SKIP) === 2)
+})
+
 test('extractTableFromReadme throws error when countType does not match', (t) => {
     mock({ 
         'mockFile1.md': '| <date>01/01/01 | <todoCounter>1  |',
@@ -36,3 +51,4 @@ test('extractTableFromReadme throws error when file is not passed', (t) => {
     })
     t.throws(() => extractTableFromReadme('path', COUNT_TYPE.TODO))
 })
+
