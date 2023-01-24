@@ -9,10 +9,10 @@ function maybeUpdateReadMeCounter(count, type) {
   
   if(type == COUNT_TYPE.TODO.type) {
     headerString = 'Todo'
-    tableHeaderTag  = COUNT_TYPE.TODO.tableTag
+    tableHeaderTag  = COUNT_TYPE.TODO.tableHeader
   } else if (type == COUNT_TYPE.SKIP.type){
     headerString = 'Skipped Tests'
-    tableHeaderTag  = COUNT_TYPE.SKIP.tableTag
+    tableHeaderTag  = COUNT_TYPE.SKIP.tableHeader
   }
 
   debug(`Reading ${readmeFile} file`)
