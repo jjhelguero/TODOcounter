@@ -1,7 +1,6 @@
 const fs = require('fs')
 const debug = require('debug')('updateReadMeTodoCounter')
-const {extractTableFromReadme, maybeUpdateReadmeTable, COUNT_TYPE} = require('./utils')
-const encoding = 'utf-8'
+const {extractTableFromReadme, maybeUpdateReadmeTable, COUNT_TYPE, FILE_ENCODING} = require('./utils')
 
 
 function maybeUpdateReadMeCounter(count, type) {
@@ -17,7 +16,7 @@ function maybeUpdateReadMeCounter(count, type) {
   }
 
   debug(`Reading ${readmeFile} file`)
-  fs.readFileSync(readmeFile, encoding, function (err, data) {
+  fs.readFileSync(readmeFile, FILE_ENCODING, function (err, data) {
     if (err) throw err
 
     const todoTable = extractTableFromReadme(data, tableHeaderTag)
