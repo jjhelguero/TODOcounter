@@ -1,20 +1,37 @@
 const dayjs = require('dayjs')
+const debug = require('debug')('updateReadMeTodoCounter')
+const fs = require('fs')
+const todoRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<todoCounter>\d+\s+\|)/gi
+const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skippedCounter>\d+\s+\|)/gi
+const COUNT_TYPE = {
+  TODO: 'todo',
+  SKIP: 'skipped'
+}
 
 /**
  * Utility funciton to extract todo table from existing
  * README in current directory
  * @param {File} readMe
- * @param {String} tableHeader
- * @returns
+ * @param {String} countType
+ * @returns number length
  */
-function extractTableFromReadme(readMe, tableHeader) {
+function extractTableFromReadme(readMe, countType) {
   debug('Extracting todo rows')
+  let foundRows, rowMatcher
 
-  const rowMatcher = new RegExp(`\|<date>(\d{2}\/\d{2}\/\d{2})?\|<${tableHeader}>(\d+)?\|`, 'gi')
-  const matchedRows = (readMe || '').match(rowMatcher) || []
+  if( countType == COUNT_TYPE.TODO) {
+    rowMatcher = todoRowMatcher
+  } else if (countType == COUNT_TYPE.SKIP) {
+    rowMatcher = skippedRowMatcher
+  }
+
+  const file = fs.readFileSync(readMe, 'utf-8')
+  const matchedRows = file.match(rowMatcher) || []
+
   debug(`Found ${matchedRows.length} matches`)
+  foundRows = matchedRows.length
 
-  return matchedRows
+  return foundRows
 }
 
 /**
@@ -66,13 +83,7 @@ function createNewCounterTable(arr, count, tableHeader) {
  * @param {Number} count
  * @returns
  */
-function createNewReadMe(data, oldTable, count, type) {
-  let headerString
-  if(type == 'todo') {
-    headerString = 'Todo'
-  } else {
-    headerString = 'Skipped Tests'
-  }
+function createNewReadMe(data, oldTable, count,headerString) {
   const tableHeader = `| Date | ${headerString} Count |\n| :---:| :---:|\n`
   const startTableTagIndex = data.indexOf(tableHeader)
   const extractedCounterTable = data.substring(0, startTableTagIndex)
@@ -92,13 +103,13 @@ function createNewReadMe(data, oldTable, count, type) {
  * @param {Number} foundCount found todo/skipped count
  * @param {String} countType todo/skipped 
  */
-function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, countType) {
+function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   const isCountDifferent = checkCounterDifference(oldTable, foundCount)
 
   if (isCountDifferent) {
     debug('Updating todo table')
 
-    const newReadMe = createNewReadMe(data, oldTable, foundCount, countType)
+    const newReadMe = createNewReadMe(data, oldTable, foundCount, header)
 
     fs.writeFile(readMe, newReadMe, encoding, function (err, data) {
       if (err) throw err
