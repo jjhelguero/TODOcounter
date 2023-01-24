@@ -120,4 +120,4 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   }
 }
 
-;(module.exports = {extractTableFromReadme, checkCounterDifference, createNewReadMe, maybeUpdateReadmeTable})
+;(module.exports = {extractTableFromReadme, checkCounterDifference, createNewReadMe, maybeUpdateReadmeTable}, COUNT_TYPE)
