@@ -15,10 +15,10 @@ const {checkCounterDifference, COUNT_TYPE} = require('../src/readmeTableUpdates/
 const table = ['| <date>01/01/01 | <todoCounter>1  |',
         '| <date>02/02/02 | <todoCounter>2  |']
 
-test('checkCounterDifference returns true when found count matches latest count', t => {
-    t.true(checkCounterDifference(table, 2, COUNT_TYPE.TODO.tableTag))
+test('checkCounterDifference returns false when found count DOES NOT match latest count', t => {
+    t.false(checkCounterDifference(table, 2, COUNT_TYPE.TODO.type))
 })
 
-test('checkCounterDifference returns false when found count DOES not match latest count', t => {
-    t.true(checkCounterDifference(table, 2, COUNT_TYPE.TODO.tableTag))
+test('checkCounterDifference returns true when found count does match latest count', t => {
+    t.true(checkCounterDifference(table, 999, COUNT_TYPE.TODO.type))
 })
