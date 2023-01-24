@@ -17,7 +17,7 @@ function todoCounter(dir, ext) {
     'expect todo counter to be a number',
     currentTodos,
   )
-  maybeUpdateReadMeCounter(currentTodos, COUNT_TYPE.todoCounter)
+  maybeUpdateReadMeCounter(currentTodos, COUNT_TYPE.TODO.typeCounter)
 }
 
 function skippedTestCounter(dir, ext) {
@@ -31,7 +31,7 @@ function skippedTestCounter(dir, ext) {
     'expect skipped tests to be a number',
     skippedTests,
   )
-  maybeUpdateReadMeCounter(skippedTests, COUNT_TYPE.SKIP)
+  maybeUpdateReadMeCounter(skippedTests, COUNT_TYPE.SKIP.type)
 }
 
 module.exports = { todoCounter, skippedTestCounter }

@@ -7,12 +7,12 @@ function maybeUpdateReadMeCounter(count, type) {
   const readmeFile = 'README.md'
   let headerString, tableHeaderTag
   
-  if(type == COUNT_TYPE.TODO) {
+  if(type == COUNT_TYPE.TODO.type) {
     headerString = 'Todo'
-    tableHeaderTag  = 'todoCounter'
-  } else if (type == COUNT_TYPE.SKIP){
+    tableHeaderTag  = COUNT_TYPE.TODO.tableTag
+  } else if (type == COUNT_TYPE.SKIP.type){
     headerString = 'Skipped Tests'
-    tableHeaderTag  = 'skippedTestsCounter'
+    tableHeaderTag  = COUNT_TYPE.SKIP.tableTag
   }
 
   debug(`Reading ${readmeFile} file`)

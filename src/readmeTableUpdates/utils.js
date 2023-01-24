@@ -7,8 +7,14 @@ const FILE_ENCODING = 'utf-8'
 const todoRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<todoCounter>\d+\s+\|)/gi
 const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skippedCounter>\d+\s+\|)/gi
 const COUNT_TYPE = {
-  TODO: 'todo',
-  SKIP: 'skipped'
+  TODO: {
+    type: 'todo',
+    tableTag: 'todoCounter'
+  },
+  SKIP: {
+    type: 'skipped',
+    tableTag: 'skippedTestsCounter'
+  }
 }
 
 /**
@@ -22,9 +28,9 @@ function extractTableFromReadme(readMe, countType) {
   debug('Extracting todo rows')
   let foundRows, rowMatcher
 
-  if( countType == COUNT_TYPE.TODO) {
+  if( countType == COUNT_TYPE.TODO.type) {
     rowMatcher = todoRowMatcher
-  } else if (countType == COUNT_TYPE.SKIP) {
+  } else if (countType == COUNT_TYPE.SKIP.type) {
     rowMatcher = skippedRowMatcher
   } else {
     throw new Error(`${countType} is not one of ${util.inspect(COUNT_TYPE)}`)
@@ -52,7 +58,7 @@ function extractTableFromReadme(readMe, countType) {
 function checkCounterDifference(table, count, tableHeader) {
   const lastRow = table[table.length - 1]
   const lastCountRegex = new RegExp(`<${tableHeader}>(?<count>\d+)`)
-  const latestCount = lastRow.match(lastCountRegex).groups.count
+  const latestCount = lastRow.match(lastCountRegex)?.groups?.count
   debug(
     `Latest table todo count: ${latestCount}\nFound todo count: ${count}`,
   )
