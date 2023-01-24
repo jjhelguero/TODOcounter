@@ -32,3 +32,11 @@ test('checkCounterDifference throws error when table is not an array', t => {
         () => checkCounterDifference(notTable, 999, COUNT_TYPE.TODO.type))
     t.is(error.message, errorMessage);
 })
+
+test('checkCounterDifference throws error when count is not a number', t => {
+    const notNumber = '9'
+    const errorMessage = `${notNumber} is not a number`
+    const error = t.throws(
+        () => checkCounterDifference(table, notNumber, COUNT_TYPE.TODO.type))
+    t.is(error.message, errorMessage);
+})
