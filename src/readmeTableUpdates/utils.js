@@ -56,7 +56,6 @@ function extractTableFromReadme(readMe, countType) {
  * @returns {Boolean}
  */
 function checkCounterDifference(table, count, countType) {
-  console.log(typeof countType)
   if(!Array.isArray(table)) throw new Error(`${table} is not an array`)
   if(typeof count !== 'number') throw new Error(`${count} is not a number`)
   if(typeof countType !== 'string') throw new Error(`${countType} is not a string`)
@@ -84,6 +83,9 @@ function checkCounterDifference(table, count, countType) {
  * @returns {Array<string>}
  */
 function createNewCounterTable(arr, count, tableHeader) {
+  if(!Array.isArray(arr)) throw new Error(`${arr} is not an array`)
+  if(typeof count !== 'number') throw new Error(`${count} is not a number`)
+  if(typeof tableHeader !== 'string') throw new Error(`${tableHeader} is not a string`)
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   const newRow = `|<date>${date}|<${tableHeader}>${count}|`
@@ -147,7 +149,8 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   extractTableFromReadme, 
   checkCounterDifference, 
   createNewReadMe, 
-  maybeUpdateReadmeTable, 
+  maybeUpdateReadmeTable,
+  createNewCounterTable,
   COUNT_TYPE, 
   FILE_ENCODING
 })
