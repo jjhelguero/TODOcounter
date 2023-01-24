@@ -2,11 +2,9 @@ const { lazyAss } = require('lazy-ass')
 const is = require('check-more-types')
 const check = require('check-more-types')
 const searchTodosInFilesInDirectory = require('./searchTodosInFilesInDirectory')
-const maybeUpdateReadMeCounter = require('./updateReadme')
-const COUNT_TYPE = {
-  TODO: 'todo',
-  SKIP: 'skipped'
-}
+const {maybeUpdateReadMeCounter} = require('./updateReadme')
+const {COUNT_TYPE} = require('./readmeTableUpdates/utils')
+
 
 function todoCounter(dir, ext) {
   lazyAss(is.unemptyString(dir), 'expect search directory', dir)
