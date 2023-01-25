@@ -1,5 +1,5 @@
 const test = require('ava')
-const {checkCounterDifference, COUNT_TYPE, arrayErrorMessage, numberErrorMessage} = require('../src/readmeTableUpdates/utils')
+const {checkCounterDifference, COUNT_TYPE, arrayErrorMessage, numberErrorMessage, countTypeErrorMessage} = require('../src/readmeTableUpdates/utils')
 
 const table = [
     '| <date>01/01/01 | <todoCounter>1  |',
@@ -32,7 +32,7 @@ test('checkCounterDifference throws error when count is not a number', t => {
 
 test('checkCounterDifference throws error when countType is invalid', t => {
     const invalidCountType = null
-    const errorMessage = `${invalidCountType} is not a string`
+    const errorMessage = countTypeErrorMessage(invalidCountType)
     const error = t.throws(
         () => checkCounterDifference(table, 2, invalidCountType))
     t.is(error.message, errorMessage);

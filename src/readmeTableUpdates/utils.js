@@ -18,6 +18,7 @@ const COUNT_TYPE = {
 }
 const arrayErrorMessage = (arr) => `${arr} is not an array`
 const numberErrorMessage = (num) => `${num} is not a number`
+const countTypeErrorMessage = (type) => `${type} is not a string`
 
 /**
  * Utility funciton to extract todo table from existing
@@ -60,7 +61,7 @@ function extractTableFromReadme(readMe, countType) {
 function checkCounterDifference(table, count, countType) {
   if(!Array.isArray(table)) throw new Error(arrayErrorMessage(table))
   if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
-  if(typeof countType !== 'string') throw new Error(`${countType} is not a string`)
+  if(typeof countType !== 'string') throw new Error(countTypeErrorMessage(countType))
   
   let lastCountRegex
   const lastRow = table[table.length - 1]
@@ -157,5 +158,6 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   COUNT_TYPE, 
   FILE_ENCODING,
   arrayErrorMessage,
-  numberErrorMessage
+  numberErrorMessage,
+  countTypeErrorMessage
 })
