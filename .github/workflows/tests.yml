@@ -7,15 +7,14 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
       - name: Lint
         run: npm run lint
   tests:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v3
-
       - name: NPM install
         uses: bahmutov/npm-install@v1
 
