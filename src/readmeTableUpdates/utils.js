@@ -82,14 +82,14 @@ function checkCounterDifference(table, count, countType) {
  * * @param {String} tableHeader
  * @returns {Array<string>}
  */
-function createNewCounterTable(arr, count, tableHeader) {
+function createNewCounterTable(arr, count, type) {
   if(!Array.isArray(arr)) throw new Error(`${arr} is not an array`)
   if(typeof count !== 'number') throw new Error(`${count} is not a number`)
-  if(typeof tableHeader !== 'string') throw new Error(`${tableHeader} is not a string`)
+  if(typeof type !== 'string') throw new Error(`${type} is not a string`)
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `| <date>${date} | <${tableHeader}>${count} |`
+  const newRow = `| <date>${date} | <${type}Counter>${count} |`
 
   arr.push(newRow)
   debug('Added new todo row')
@@ -109,11 +109,11 @@ function createNewCounterTable(arr, count, tableHeader) {
  * @param {Number} count
  * @returns
  */
-function createNewReadMe(data, oldTable, count,headerString) {
-  const tableHeader = `| Date | ${headerString} Count |\n| :---:| :---:|\n`
+function createNewReadMe(data, oldTable, count,type) {
+  const tableHeader = `| Date | ${type} Count |\n| :---:| :---:|\n`
   const startTableTagIndex = data.indexOf(tableHeader)
   const extractedCounterTable = data.substring(0, startTableTagIndex)
-  const tableWithoutHeader = createNewCounterTable(oldTable, count, tableHeader)
+  const tableWithoutHeader = createNewCounterTable(oldTable, count, type)
     .toString()
     .replace(/\|,/g, '|\n')
   const newCounterTable = tableHeader.concat(tableWithoutHeader, '\n')
