@@ -86,9 +86,10 @@ function createNewCounterTable(arr, count, tableHeader) {
   if(!Array.isArray(arr)) throw new Error(`${arr} is not an array`)
   if(typeof count !== 'number') throw new Error(`${count} is not a number`)
   if(typeof tableHeader !== 'string') throw new Error(`${tableHeader} is not a string`)
+
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<${tableHeader}>${count}|`
+  const newRow = `| <date>${date} | <${tableHeader}>${count} |`
 
   arr.push(newRow)
   debug('Added new todo row')
