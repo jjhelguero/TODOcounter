@@ -47,14 +47,14 @@ test('extractTableFromReadme throws error when countType does not match', (t) =>
     'mockFile1.md': '| <date>01/01/01 | <todoCounter>1  |'
   })
   const incorrectType = 't'
-  const errorMessage = `${incorrectType} is not one of ${util.inspect(
+  const expectedErrorMessage = `${incorrectType} is not one of ${util.inspect(
     COUNT_TYPE
   )}`
-  const error = t.throws(() =>
+  const actualError = t.throws(() =>
     extractTableFromReadme('mockFile1.md', incorrectType)
   )
 
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('extractTableFromReadme throws error when file is not passed', (t) => {

@@ -62,29 +62,29 @@ test('createNewCounterTable returns new counter Table when table is 10 rows', (t
 
 test('createNewCounterTable throws error when table is not an array', (t) => {
   const notTable = 't'
-  const errorMessage = arrayErrorMessage(notTable)
-  const error = t.throws(() =>
+  const expectedErrorMessage = arrayErrorMessage(notTable)
+  const actualError = t.throws(() =>
     createNewCounterTable(notTable, 2, COUNT_TYPE.TODO.tableHeader)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('createNewCounterTable throws error when count is not a number', (t) => {
   const table = ['| <date>01/01/01 | <todoCounter>1  |']
   const notNumber = '9'
-  const errorMessage = numberErrorMessage(notNumber)
-  const error = t.throws(() =>
+  const expectedErrorMessage = numberErrorMessage(notNumber)
+  const actualError = t.throws(() =>
     createNewCounterTable(table, notNumber, COUNT_TYPE.TODO.tableHeader)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('createNewCounterTable throws error when tableHeader is invalid', (t) => {
   const table = ['| <date>01/01/01 | <todoCounter>1  |']
   const invalidCountType = null
-  const errorMessage = stringErrorMessage(invalidCountType)
-  const error = t.throws(() =>
+  const expectedErrorMessage = stringErrorMessage(invalidCountType)
+  const actualError = t.throws(() =>
     createNewCounterTable(table, 2, invalidCountType)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
