@@ -11,7 +11,7 @@ const skippedTestRegex = /\/{2}\s?skip(\s|:)?/
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchSkippedTestsInFilesInDirectory(dir, ext) {
+function searchSkippedTestsInFilesInDirectory (dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return

@@ -7,7 +7,7 @@ const {
   COUNT_TYPE,
   stringErrorMessage,
   arrayErrorMessage,
-  numberErrorMessage,
+  numberErrorMessage
 } = require('../src/readmeTableUpdates/utils')
 
 test('createNewReadMe creates README Text', (t) => {
@@ -15,10 +15,10 @@ test('createNewReadMe creates README Text', (t) => {
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`,
+        | <date>04/04/04 | <todoCounter>4  |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
-  const oldTable = data.split(/\n        /)
+  const oldTable = data.split(/\n {8}/)
   const formattedOldTable = oldTable.toString().replace(/\|,/g, '|\n')
   const count = 10
   const d = new Date()
@@ -43,10 +43,10 @@ test('createNewReadMe creates README Text with table already having 10 entries',
         | <date>07/07/07 | <todoCounter>7  |
         | <date>08/08/08 | <todoCounter>8  |
         | <date>09/09/09 | <todoCounter>9  |
-        | <date>10/10/10 | <todoCounter>10 |`,
+        | <date>10/10/10 | <todoCounter>10 |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
-  const oldTable = data.split(/\n        /)
+  const oldTable = data.split(/\n {8}/)
   oldTable.shift()
   const formattedOldTable = oldTable.toString().replace(/\|,/g, '|\n')
   const count = 100
@@ -66,15 +66,15 @@ test('createNewReadMe throws an error when data is not a string', (t) => {
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`,
+        | <date>04/04/04 | <todoCounter>4  |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
-  const oldTable = data.split(/\n        /)
+  const oldTable = data.split(/\n {8}/)
   const badData = {}
   const count = 100
   const errorMessage = stringErrorMessage(badData)
   const error = t.throws(() =>
-    createNewReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type),
+    createNewReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type)
   )
   t.is(error.message, errorMessage)
 })
@@ -84,14 +84,14 @@ test('createNewReadMe throws an error when old table is not an array', (t) => {
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`,
+        | <date>04/04/04 | <todoCounter>4  |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const badOldTable = ''
   const count = 10
   const errorMessage = arrayErrorMessage(badOldTable)
   const error = t.throws(() =>
-    createNewReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type),
+    createNewReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type)
   )
   t.is(error.message, errorMessage)
 })
@@ -101,14 +101,14 @@ test('createNewReadMe throws an error when count is not a number', (t) => {
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`,
+        | <date>04/04/04 | <todoCounter>4  |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
-  const oldTable = data.split(/\n        /)
+  const oldTable = data.split(/\n {8}/)
   const badCount = '100'
   const errorMessage = numberErrorMessage(badCount)
   const error = t.throws(() =>
-    createNewReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type),
+    createNewReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type)
   )
   t.is(error.message, errorMessage)
 })
@@ -118,15 +118,15 @@ test('createNewReadMe throws an error when countType is not a string', (t) => {
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`,
+        | <date>04/04/04 | <todoCounter>4  |`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
-  const oldTable = data.split(/\n        /)
+  const oldTable = data.split(/\n {8}/)
   const count = 100
   const badCountType = null
   const errorMessage = stringErrorMessage(badCountType)
   const error = t.throws(() =>
-    createNewReadMe(data, oldTable, count, badCountType),
+    createNewReadMe(data, oldTable, count, badCountType)
   )
   t.is(error.message, errorMessage)
 })

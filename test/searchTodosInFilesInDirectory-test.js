@@ -8,10 +8,10 @@ test('searchTodosInFilesInDirectory returns a number', (t) => {
       'mockFile1.js': '//todo\n// todo',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// todo',
+        'mockFile2.js': '// todo'
       },
-      'mockFile.java': '',
-    },
+      'mockFile.java': ''
+    }
   })
   const num = searchTodosInFilesInDirectory('fakeDir', '.js')
   t.true(typeof num === 'number')
@@ -23,10 +23,10 @@ test('searchTodosInFilesInDirectory returns count of 3', (t) => {
       'mockFile1.js': '//todo\n// todo',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// todo',
+        'mockFile2.js': '// todo'
       },
-      'mockFile.java': '',
-    },
+      'mockFile.java': ''
+    }
   })
   const num = searchTodosInFilesInDirectory('fakeDir', '.js')
   t.true(num >= 1)

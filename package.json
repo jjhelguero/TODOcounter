@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "format": "prettier --write 'src/*.js' 'test/*.js'",
-    "lint": "standard  src/*.js test/*.js",
+    "lint": "standard --fix src/*.js test/*.js",
     "test": "ava test",
     "demo": "node ./bin/todo-counter.js 'demo' '.js'",
     "semantic-release": "semantic-release",
