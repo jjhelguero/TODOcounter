@@ -18,7 +18,7 @@ const COUNT_TYPE = {
 }
 const arrayErrorMessage = (arr) => `${arr} is not an array`
 const numberErrorMessage = (num) => `${num} is not a number`
-const countTypeErrorMessage = (type) => `${type} is not a string`
+const stringErrorMessage = (type) => `${type} is not a string`
 
 /**
  * Utility funciton to extract todo table from existing
@@ -61,7 +61,7 @@ function extractTableFromReadme(readMe, countType) {
 function checkCounterDifference(table, count, countType) {
   if(!Array.isArray(table)) throw new Error(arrayErrorMessage(table))
   if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
-  if(typeof countType !== 'string') throw new Error(countTypeErrorMessage(countType))
+  if(typeof countType !== 'string') throw new Error(stringErrorMessage(countType))
   
   let lastCountRegex
   const lastRow = table[table.length - 1]
@@ -87,8 +87,8 @@ function checkCounterDifference(table, count, countType) {
  */
 function createNewCounterTable(arr, count, type) {
   if(!Array.isArray(arr)) throw new Error(arrayErrorMessage(arr))
-  if(typeof count !== 'number') throw new Error(`${count} is not a number`)
-  if(typeof type !== 'string') throw new Error(`${type} is not a string`)
+  if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
+  if(typeof type !== 'string') throw new Error(stringErrorMessage(type))
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
@@ -113,6 +113,11 @@ function createNewCounterTable(arr, count, type) {
  * @returns
  */
 function createNewReadMe(data, oldTable, count,type) {
+  if(typeof data !== 'string') throw new Error(stringErrorMessage(data))
+  if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
+  if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
+  if(typeof type !== 'string') throw new Error(stringErrorMessage(type))
+
   const tableHeader = `| Date | ${type} Count |\n| :---:| :---:|\n`
   const startTableTagIndex = data.indexOf(tableHeader)
   const extractedCounterTable = data.substring(0, startTableTagIndex)
@@ -159,5 +164,5 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   FILE_ENCODING,
   arrayErrorMessage,
   numberErrorMessage,
-  countTypeErrorMessage
+  stringErrorMessage
 })

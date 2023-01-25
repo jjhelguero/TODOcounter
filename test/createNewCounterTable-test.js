@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 const test = require('ava')
-const {createNewCounterTable, COUNT_TYPE, arrayErrorMessage, numberErrorMessage, countTypeErrorMessage} = require('../src/readmeTableUpdates/utils')
+const {createNewCounterTable, COUNT_TYPE, arrayErrorMessage, numberErrorMessage, stringErrorMessage} = require('../src/readmeTableUpdates/utils')
 
 test('createNewCounterTable returns new counter Table when table is less than 10 rows', t => {
     const count = 10
@@ -44,7 +44,6 @@ test('createNewCounterTable returns new counter Table when table is 10 rows', t 
     const newTable = table
     newTable.push(newRow)
     newTable.shift()
-    console.log(newTable)
 
     t.deepEqual(createNewCounterTable(table, count, COUNT_TYPE.TODO.tableHeader), newTable)
 })
@@ -69,7 +68,7 @@ test('createNewCounterTable throws error when count is not a number', t => {
 test('createNewCounterTable throws error when tableHeader is invalid', t => {
     const table = ['| <date>01/01/01 | <todoCounter>1  |']
     const invalidCountType = null
-    const errorMessage = countTypeErrorMessage(invalidCountType)
+    const errorMessage = stringErrorMessage(invalidCountType)
     const error = t.throws(
         () => createNewCounterTable(table, 2, invalidCountType))
     t.is(error.message, errorMessage);
