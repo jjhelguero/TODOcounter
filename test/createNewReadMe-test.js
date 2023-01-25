@@ -27,7 +27,7 @@ ${formattedOldTable}
 })
 
 
-test('createNewReadMe creates README Text with table alreading having 10 entries', t => {
+test('createNewReadMe creates README Text with table already having 10 entries', t => {
      mock({ 
         'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
