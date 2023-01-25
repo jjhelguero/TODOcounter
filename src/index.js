@@ -1,7 +1,7 @@
 const { lazyAss } = require('lazy-ass')
 const is = require('check-more-types')
 const check = require('check-more-types')
-const { searchTodosInFilesInDirectory } = require('./searchTodosInFilesInDirectory')
+const searchTodosInFilesInDirectory = require('./searchTodosInFilesInDirectory')
 const { maybeUpdateReadMeCounter } = require('./updateReadme')
 const { COUNT_TYPE } = require('./readmeTableUpdates/utils')
 
@@ -23,7 +23,7 @@ function skippedTestCounter (dir, ext) {
   lazyAss(is.unemptyString(dir), 'expect search directory', dir)
   lazyAss(check.arrayOf(check.unemptyString, ext), 'expect file filter', ext)
 
-  const skippedTests = searchFilesInDirectory(dir, ext)
+  const skippedTests = searchTodosInFilesInDirectory(dir, ext)
 
   lazyAss(
     is.number(skippedTests),
