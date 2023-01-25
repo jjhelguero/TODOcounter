@@ -4,7 +4,12 @@ on:
     branches:
       - master
 jobs:
+  check:
+    steps:
+      -name: Lint
+        run: npm run Lint
   tests:
+    needs: check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
