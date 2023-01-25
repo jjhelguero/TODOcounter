@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Lint
-        run: npm Lint
+        run: npm lint
   tests:
     needs: check
     runs-on: ubuntu-latest
