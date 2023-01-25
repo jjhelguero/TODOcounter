@@ -6,7 +6,7 @@ on:
 jobs:
   check:
     steps:
-      -name: Lint
+      - name: Lint
         run: npm Lint
   tests:
     needs: check
