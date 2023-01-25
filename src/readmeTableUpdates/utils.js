@@ -16,6 +16,7 @@ const COUNT_TYPE = {
     tableHeader: 'skippedTestsCounter'
   }
 }
+const arrayErrorMessage = (arr) => `${arr} is not an array`
 
 /**
  * Utility funciton to extract todo table from existing
@@ -56,7 +57,7 @@ function extractTableFromReadme(readMe, countType) {
  * @returns {Boolean}
  */
 function checkCounterDifference(table, count, countType) {
-  if(!Array.isArray(table)) throw new Error(`${table} is not an array`)
+  if(!Array.isArray(table)) throw new Error(arrayErrorMessage(table))
   if(typeof count !== 'number') throw new Error(`${count} is not a number`)
   if(typeof countType !== 'string') throw new Error(`${countType} is not a string`)
   
@@ -83,7 +84,7 @@ function checkCounterDifference(table, count, countType) {
  * @returns {Array<string>}
  */
 function createNewCounterTable(arr, count, type) {
-  if(!Array.isArray(arr)) throw new Error(`${arr} is not an array`)
+  if(!Array.isArray(arr)) throw new Error(arrayErrorMessage(arr))
   if(typeof count !== 'number') throw new Error(`${count} is not a number`)
   if(typeof type !== 'string') throw new Error(`${type} is not a string`)
 
@@ -153,5 +154,6 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   maybeUpdateReadmeTable,
   createNewCounterTable,
   COUNT_TYPE, 
-  FILE_ENCODING
+  FILE_ENCODING,
+  arrayErrorMessage
 })

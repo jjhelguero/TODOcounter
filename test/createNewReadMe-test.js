@@ -2,7 +2,7 @@ const test = require('ava')
 const dayjs = require('dayjs')
 const mock = require('mock-fs')
 const fs = require('fs')
-const {createNewReadMe, COUNT_TYPE} = require('../src/readmeTableUpdates/utils')
+const {createNewReadMe, COUNT_TYPE, arrayErrorMessage} = require('../src/readmeTableUpdates/utils')
 
 test('createNewReadMe creates README Text', t => {
      mock({ 
@@ -55,3 +55,9 @@ ${formattedOldTable}
     const newTable = createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type)
     t.deepEqual(newTable, expectedNewReadMe)
 })
+
+// test('createNewReadMe throws an error when data is not a file', t=> {
+//     const errorMessage = arrayErrorMessage()
+//     const error = t.throws(() => createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type))
+//     t.is(error.message, errorMessage);
+// })

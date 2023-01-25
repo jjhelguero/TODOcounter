@@ -1,5 +1,5 @@
 const test = require('ava')
-const {checkCounterDifference, COUNT_TYPE} = require('../src/readmeTableUpdates/utils')
+const {checkCounterDifference, COUNT_TYPE, arrayErrorMessage} = require('../src/readmeTableUpdates/utils')
 
 const table = [
     '| <date>01/01/01 | <todoCounter>1  |',
@@ -16,7 +16,7 @@ test('checkCounterDifference returns true when found count does match latest cou
 
 test('checkCounterDifference throws error when table is not an array', t => {
     const notTable = 't'
-    const errorMessage = `${notTable} is not an array`
+    const errorMessage = arrayErrorMessage(notTable)
     const error = t.throws(
         () => checkCounterDifference(notTable, 999, COUNT_TYPE.TODO.type))
     t.is(error.message, errorMessage);
