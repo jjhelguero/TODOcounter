@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Lint
-        run: npm lint
+        run: npm run lint
   tests:
     needs: check
     runs-on: ubuntu-latest
@@ -20,4 +20,4 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Test 🧪
-        run: npm test
+        run: npm run test
