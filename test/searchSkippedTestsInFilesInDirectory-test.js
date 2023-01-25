@@ -30,7 +30,6 @@ test('searchSkippedTestsInFilesInDirectory returns count of 3', (t) => {
   })
   const num = searchSkippedTestsInFilesInDirectory('fakeDir', '.js')
   t.true(num >= 1)
-
 })
 
 test('searchSkippedTestsInFilesInDirectory should return empty string with null directory', (t) => {
@@ -42,11 +41,16 @@ test('searchSkippedTestsInFilesInDirectory should return empty string with null 
 test('searchSkippedTestsInFilesInDirectory should return empty string with undefined directory', (t) => {
   const validExt = '.js'
   const undefinedDirectory = undefined
-  t.is(searchSkippedTestsInFilesInDirectory(undefinedDirectory, validExt), undefined)
+  t.is(
+    searchSkippedTestsInFilesInDirectory(undefinedDirectory, validExt),
+    undefined,
+  )
 })
-
 
 test('searchSkippedTestsInFilesInDirectory should return empty string with invalid directory', (t) => {
   const validExt = '.js'
-  t.is(searchSkippedTestsInFilesInDirectory('invalidDirect', validExt), undefined)
+  t.is(
+    searchSkippedTestsInFilesInDirectory('invalidDirect', validExt),
+    undefined,
+  )
 })

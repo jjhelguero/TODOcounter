@@ -1,6 +1,6 @@
 const fs = require('fs')
 const util = require('util')
-const {getFilesInDirectory, getCount} = require('./utils')
+const { getFilesInDirectory, getCount } = require('./utils')
 const debug = require('debug')('searchTodosInFilesInDirectory')
 const skippedTestRegex = /\/{2}\s?skip(\s|:)?/
 
@@ -26,4 +26,4 @@ function searchSkippedTestsInFilesInDirectory(dir, ext) {
   return getCount(files, skippedTestRegex)
 }
 
-;(module.exports = searchSkippedTestsInFilesInDirectory)
+module.exports = searchSkippedTestsInFilesInDirectory

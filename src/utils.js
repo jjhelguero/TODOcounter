@@ -12,7 +12,7 @@ function getCount(files, regex) {
   const flags = 'ig'
   let count = 0
 
-   for( const file of files ) {
+  for (const file of files) {
     // if (err) throw err
     const fileContent = fs.readFileSync(file, { encoding: 'utf-8' })
     const matcher = new RegExp(regex, flags)
@@ -62,4 +62,4 @@ function getFilesInDirectory(dir, ext) {
   return files
 }
 
-;(module.exports = {getFilesInDirectory, getCount})
+module.exports = { getFilesInDirectory, getCount }

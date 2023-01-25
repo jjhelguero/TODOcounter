@@ -1,6 +1,6 @@
 const fs = require('fs')
 const util = require('util')
-const {getFilesInDirectory, getCount} = require('./utils')
+const { getFilesInDirectory, getCount } = require('./utils')
 const debug = require('debug')('searchTodosInFilesInDirectory')
 const todoRegex = /\/{2}\s?todo(\s|:)?/
 
@@ -23,9 +23,7 @@ function searchTodosInFilesInDirectory(dir, ext) {
 
   debug('Files found: \n' + util.inspect(files, { maxArrayLength: null }))
 
-  
-
   return getCount(files, todoRegex)
 }
 
-;(module.exports = searchTodosInFilesInDirectory)
+module.exports = searchTodosInFilesInDirectory

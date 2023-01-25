@@ -30,7 +30,6 @@ test('searchTodosInFilesInDirectory returns count of 3', (t) => {
   })
   const num = searchTodosInFilesInDirectory('fakeDir', '.js')
   t.true(num >= 1)
-
 })
 
 test('searchTodosInFilesInDirectory should return empty string with null directory', (t) => {
@@ -44,7 +43,6 @@ test('searchTodosInFilesInDirectory should return empty string with undefined di
   const undefinedDirectory = undefined
   t.is(searchTodosInFilesInDirectory(undefinedDirectory, validExt), undefined)
 })
-
 
 test('searchTodosInFilesInDirectory should return empty string with invalid directory', (t) => {
   const validExt = '.js'

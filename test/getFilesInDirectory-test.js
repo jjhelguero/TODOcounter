@@ -1,7 +1,6 @@
 const test = require('ava')
 const mock = require('mock-fs')
-const {getFilesInDirectory} = require('../src/utils')
-
+const { getFilesInDirectory } = require('../src/utils')
 
 test('getFilesInDirectory returns object of more than 1 file', (t) => {
   mock({
