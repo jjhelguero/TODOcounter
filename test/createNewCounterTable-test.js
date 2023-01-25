@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 const test = require('ava')
-const {createNewCounterTable, COUNT_TYPE, arrayErrorMessage} = require('../src/readmeTableUpdates/utils')
+const {createNewCounterTable, COUNT_TYPE, arrayErrorMessage, numberErrorMessage} = require('../src/readmeTableUpdates/utils')
 
 test('createNewCounterTable returns new counter Table when table is less than 10 rows', t => {
     const count = 10
@@ -60,7 +60,7 @@ test('createNewCounterTable throws error when table is not an array', t => {
 test('createNewCounterTable throws error when count is not a number', t => {
     const table = ['| <date>01/01/01 | <todoCounter>1  |']
     const notNumber = '9'
-    const errorMessage = `${notNumber} is not a number`
+    const errorMessage = numberErrorMessage(notNumber)
     const error = t.throws(
         () => createNewCounterTable(table, notNumber, COUNT_TYPE.TODO.tableHeader))
     t.is(error.message, errorMessage);
