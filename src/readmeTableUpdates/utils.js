@@ -138,7 +138,6 @@ function createNewReadMe(data, oldTable, count,type) {
  * @param {String} countType todo/skipped 
  */
 function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
-  console.log(typeof data)
   if(typeof data !== 'string') throw new Error(stringErrorMessage(data))
   if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
   if(typeof foundCount !== 'number') throw new Error(numberErrorMessage(foundCount))
