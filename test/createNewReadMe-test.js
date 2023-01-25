@@ -72,11 +72,11 @@ test('createNewReadMe throws an error when data is not a string', (t) => {
   const oldTable = data.split(/\n {8}/)
   const badData = {}
   const count = 100
-  const errorMessage = stringErrorMessage(badData)
-  const error = t.throws(() =>
+  const expectedErrorMessage = stringErrorMessage(badData)
+  const actualError = t.throws(() =>
     createNewReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('createNewReadMe throws an error when old table is not an array', (t) => {
@@ -89,11 +89,11 @@ test('createNewReadMe throws an error when old table is not an array', (t) => {
   const data = fs.readFileSync('mockFile1.md').toString()
   const badOldTable = ''
   const count = 10
-  const errorMessage = arrayErrorMessage(badOldTable)
-  const error = t.throws(() =>
+  const expectedErrorMessage = arrayErrorMessage(badOldTable)
+  const actualError = t.throws(() =>
     createNewReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('createNewReadMe throws an error when count is not a number', (t) => {
@@ -106,11 +106,11 @@ test('createNewReadMe throws an error when count is not a number', (t) => {
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
   const badCount = '100'
-  const errorMessage = numberErrorMessage(badCount)
-  const error = t.throws(() =>
+  const expectedErrorMessage = numberErrorMessage(badCount)
+  const actualError = t.throws(() =>
     createNewReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
 
 test('createNewReadMe throws an error when countType is not a string', (t) => {
@@ -124,9 +124,9 @@ test('createNewReadMe throws an error when countType is not a string', (t) => {
   const oldTable = data.split(/\n {8}/)
   const count = 100
   const badCountType = null
-  const errorMessage = stringErrorMessage(badCountType)
-  const error = t.throws(() =>
+  const expectedErrorMessage = stringErrorMessage(badCountType)
+  const actualError = t.throws(() =>
     createNewReadMe(data, oldTable, count, badCountType)
   )
-  t.is(error.message, errorMessage)
+  t.is(actualError.message, expectedErrorMessage)
 })
