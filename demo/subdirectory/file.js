@@ -5,6 +5,7 @@ function nothing() {
     // TODO: this is be counted
 }
 
-//  todo will not be counted
+//  todo will be counted
 /\/\/todo will not be counted/
 // todowillnotbecounted
+// TODO add another valid todo
