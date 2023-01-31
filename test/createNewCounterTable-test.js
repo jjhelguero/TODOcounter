@@ -23,12 +23,12 @@ test('createNewCounterTable returns new counter Table when table is less than 10
   ]
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.tableHeader}>${count}|`
-  const newTable = table
+  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.type.toLowerCase()}Counter>${count}|`
+  const newTable = [...table]
   newTable.push(newRow)
 
   t.deepEqual(
-    createNewCounterTable(table, count, COUNT_TYPE.TODO.tableHeader),
+    createNewCounterTable(table, count, COUNT_TYPE.TODO.type),
     newTable
   )
 })
@@ -49,13 +49,13 @@ test('createNewCounterTable returns new counter Table when table is 10 rows', (t
   ]
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `| <date>${date} | <${COUNT_TYPE.TODO.tableHeader}>${count} |`
-  const newTable = table
+  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.type.toLowerCase()}Counter>${count}|`
+  const newTable = [...table]
   newTable.push(newRow)
   newTable.shift()
 
   t.deepEqual(
-    createNewCounterTable(table, count, COUNT_TYPE.TODO.tableHeader),
+    createNewCounterTable(table, count, COUNT_TYPE.TODO.type),
     newTable
   )
 })

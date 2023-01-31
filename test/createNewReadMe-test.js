@@ -3,14 +3,14 @@ const dayjs = require('dayjs')
 const mock = require('mock-fs')
 const fs = require('fs')
 const {
-  createNewReadMe,
+  updateCounterTable,
   COUNT_TYPE,
   stringErrorMessage,
   arrayErrorMessage,
   numberErrorMessage
 } = require('../src/readmeTableUpdates/utils')
 
-test('createNewReadMe creates README Text', (t) => {
+test('updateCounterTable creates README Text', (t) => {
   mock({
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
@@ -28,11 +28,11 @@ test('createNewReadMe creates README Text', (t) => {
 ${formattedOldTable}
 |<date>${date}|<todoCounter>${count}|
 `
-  const newTable = createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type)
+  const newTable = updateCounterTable(data, oldTable, count, COUNT_TYPE.TODO.type)
   t.deepEqual(newTable, expectedNewReadMe)
 })
 
-test('createNewReadMe creates README Text with table already having 10 entries', (t) => {
+test('updateCounterTable creates README Text with table already having 10 entries', (t) => {
   mock({
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
@@ -57,11 +57,11 @@ test('createNewReadMe creates README Text with table already having 10 entries',
 ${formattedOldTable}
 |<date>${date}|<todoCounter>${count}|
 `
-  const newTable = createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type)
+  const newTable = updateCounterTable(data, oldTable, count, COUNT_TYPE.TODO.type)
   t.deepEqual(newTable, expectedNewReadMe)
 })
 
-test('createNewReadMe throws an error when data is not a string', (t) => {
+test('updateCounterTable throws an error when data is not a string', (t) => {
   mock({
     'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
         |<date>02/02/02|<todoCounter>2|
@@ -74,12 +74,12 @@ test('createNewReadMe throws an error when data is not a string', (t) => {
   const count = 100
   const expectedErrorMessage = stringErrorMessage(badData)
   const actualError = t.throws(() =>
-    createNewReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type)
+    updateCounterTable(badData, oldTable, count, COUNT_TYPE.TODO.type)
   )
   t.is(actualError.message, expectedErrorMessage)
 })
 
-test('createNewReadMe throws an error when old table is not an array', (t) => {
+test('updateCounterTable throws an error when old table is not an array', (t) => {
   mock({
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
@@ -91,12 +91,12 @@ test('createNewReadMe throws an error when old table is not an array', (t) => {
   const count = 10
   const expectedErrorMessage = arrayErrorMessage(badOldTable)
   const actualError = t.throws(() =>
-    createNewReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type)
+    updateCounterTable(data, badOldTable, count, COUNT_TYPE.TODO.type)
   )
   t.is(actualError.message, expectedErrorMessage)
 })
 
-test('createNewReadMe throws an error when count is not a number', (t) => {
+test('updateCounterTable throws an error when count is not a number', (t) => {
   mock({
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
@@ -108,12 +108,12 @@ test('createNewReadMe throws an error when count is not a number', (t) => {
   const badCount = '100'
   const expectedErrorMessage = numberErrorMessage(badCount)
   const actualError = t.throws(() =>
-    createNewReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type)
+    updateCounterTable(data, oldTable, badCount, COUNT_TYPE.TODO.type)
   )
   t.is(actualError.message, expectedErrorMessage)
 })
 
-test('createNewReadMe throws an error when countType is not a string', (t) => {
+test('updateCounterTable throws an error when countType is not a string', (t) => {
   mock({
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
@@ -126,7 +126,7 @@ test('createNewReadMe throws an error when countType is not a string', (t) => {
   const badCountType = null
   const expectedErrorMessage = stringErrorMessage(badCountType)
   const actualError = t.throws(() =>
-    createNewReadMe(data, oldTable, count, badCountType)
+    updateCounterTable(data, oldTable, count, badCountType)
   )
   t.is(actualError.message, expectedErrorMessage)
 })

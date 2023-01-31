@@ -90,26 +90,28 @@ function createNewCounterTable(arr, count, type) {
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   const newRow = `|<date>${date}|<${type.toLowerCase()}Counter>${count}|`
+  const cloneArr = [...arr]
 
-  arr.push(newRow)
+  cloneArr.push(newRow)
   debug('Added new todo row')
 
-  if (arr.length > 10) {
-    arr.shift()
+  if (cloneArr.length > 10) {
+    cloneArr.shift()
     debug('Removed first(old) todo row')
   }
 
-  return arr
+  return cloneArr
 }
 
 /**
- * Utilty function to create new Readme
+ * Utility function to update counter table
  * @param {File} data
  * @param {String} oldTable
  * @param {Number} count
+ * @param {String} type 'todo' or 'skippedTest'
  * @returns
  */
-function createNewReadMe(readMeData, oldTable, count,type) {
+function updateCounterTable(readMeData, oldTable, count,type) {
   if(typeof readMeData !== 'string') throw new Error(stringErrorMessage(readMeData))
   if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
   if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
@@ -117,13 +119,13 @@ function createNewReadMe(readMeData, oldTable, count,type) {
 
   const tableHeader = `| Date | ${type} Count |\n| :---:| :---:|\n`
   const startTableTagIndex = readMeData.indexOf(tableHeader)
-  const extractedCounterTable = readMeData.substring(0, startTableTagIndex)
+  const extractedReadMeWithoutTable = readMeData.substring(0, startTableTagIndex)
   const tableWithoutHeader = createNewCounterTable(oldTable, count, type)
     .toString()
     .replace(/\|,/g, '|\n')
   const newCounterTable = tableHeader.concat(tableWithoutHeader, '\n')
 
-  return extractedCounterTable.concat(newCounterTable)
+  return extractedReadMeWithoutTable.concat(newCounterTable)
 }
 
 /**
@@ -145,7 +147,7 @@ function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCoun
   if (isCountDifferent) {
     debug('Updating todo table')
 
-    const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countType)
+    const newReadMe = updateCounterTable(readMeData, oldCountTable, foundCount, countType)
 
     fs.writeFile(readMePath, newReadMe, FILE_ENCODING, function (err, data) {
       if (err) throw err
@@ -159,7 +161,7 @@ function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCoun
 ;(module.exports = {
   extractTableFromReadme, 
   checkCounterDifference, 
-  createNewReadMe, 
+  updateCounterTable, 
   maybeUpdateReadmeTable,
   createNewCounterTable,
   COUNT_TYPE, 
