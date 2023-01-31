@@ -21,33 +21,30 @@ const numberErrorMessage = (num) => `${num} is not a number`
 const stringErrorMessage = (type) => `${type} is not a string`
 
 /**
- * Utility funciton to extract todo table from existing
- * README in current directory
- * @param {File} readMe
+ * Utility function to extract todo table from existing
+ * README in current directory and return table rows in array
+ * @param {File} readMePath
  * @param {String} countType
  * @returns number length
  */
-function extractTableFromReadme(readMe, countType) {
+function extractTableFromReadme(readMePath, countType) {
   debug('Extracting todo rows')
-  let foundRows, rowMatcher
+  let rowMatcher
 
-  if( countType == COUNT_TYPE.TODO.type) {
+  if( countType == COUNT_TYPE.TODO.tableHeader) {
     rowMatcher = todoRowMatcher
-  } else if (countType == COUNT_TYPE.SKIP.type) {
+  } else if (countType == COUNT_TYPE.SKIP.tableHeader) {
     rowMatcher = skippedRowMatcher
   } else {
-    throw new Error(`${countType} is not one of ${util.inspect(COUNT_TYPE)}`)
+    throw new Error(countType + ` is not one of ${util.inspect(COUNT_TYPE)}`)
   }
 
-  const file = fs.readFileSync(readMe, FILE_ENCODING, function(err) {
-    if (err) { throw err }
-  })
+  const file = fs.readFileSync(readMePath, FILE_ENCODING)
   const matchedRows = file.match(rowMatcher) || []
 
   debug(`Found ${matchedRows.length} matches`)
-  foundRows = matchedRows.length
 
-  return foundRows
+  return matchedRows
 }
 
 /**
@@ -143,14 +140,14 @@ function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
   if(typeof foundCount !== 'number') throw new Error(numberErrorMessage(foundCount))
   if(typeof header !== 'string') throw new Error(stringErrorMessage(header))
 
-  const isCountDifferent = checkCounterDifference(oldTable, foundCount)
+  const isCountDifferent = checkCounterDifference(oldTable, foundCount, header)
 
   if (isCountDifferent) {
     debug('Updating todo table')
 
     const newReadMe = createNewReadMe(data, oldTable, foundCount, header)
 
-    fs.writeFile(readMe, newReadMe, encoding, function (err, data) {
+    fs.writeFile(readMe, newReadMe, FILE_ENCODING, function (err, data) {
       if (err) throw err
       debug('ReadMe file updated!')
     })

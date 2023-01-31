@@ -8,3 +8,5 @@ function nothing() {
 //  todo will not be counted
 /\/\/todo will not be counted/
 // todowillnotbecounted
+// todo: one more
+// todo
