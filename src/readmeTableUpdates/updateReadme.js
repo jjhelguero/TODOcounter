@@ -28,9 +28,9 @@ function maybeUpdateReadMeCounter(count, countType) {
   const readMeContent = fs.readFileSync(fullPath, FILE_ENCODING, function (err, data) {
     if (err) throw err
   })
-  const todoTable = extractTableFromReadme(fullPath, headerString)
+  const countTable = extractTableFromReadme(fullPath, headerString)
 
-  maybeUpdateReadmeTable(readmeFile, readMeContent, todoTable, count, tableHeaderTag)
+  maybeUpdateReadmeTable(readmeFile, readMeContent, countTable, count, tableHeaderTag)
 }
 
 ;(module.exports = maybeUpdateReadMeCounter)
