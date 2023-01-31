@@ -26,7 +26,7 @@ test('createNewReadMe creates README Text', (t) => {
   const expectedNewReadMe = `| Date | ${COUNT_TYPE.TODO.type} Count |
 | :---:| :---:|
 ${formattedOldTable}
-| <date>${date} | <todoCounter>${count} |
+|<date>${date}|<todoCounter>${count}|
 `
   const newTable = createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type)
   t.deepEqual(newTable, expectedNewReadMe)
@@ -55,7 +55,7 @@ test('createNewReadMe creates README Text with table already having 10 entries',
   const expectedNewReadMe = `| Date | ${COUNT_TYPE.TODO.type} Count |
 | :---:| :---:|
 ${formattedOldTable}
-| <date>${date} | <todoCounter>${count} |
+|<date>${date}|<todoCounter>${count}|
 `
   const newTable = createNewReadMe(data, oldTable, count, COUNT_TYPE.TODO.type)
   t.deepEqual(newTable, expectedNewReadMe)
@@ -63,10 +63,10 @@ ${formattedOldTable}
 
 test('createNewReadMe throws an error when data is not a string', (t) => {
   mock({
-    'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
-        | <date>02/02/02 | <todoCounter>2  |
-        | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`
+    'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
+        |<date>02/02/02|<todoCounter>2|
+        |<date>03/03/03|<todoCounter>3|
+        |<date>04/04/04|<todoCounter>4|`
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)

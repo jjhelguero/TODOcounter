@@ -4,8 +4,8 @@ const fs = require('fs')
 const util = require('util')
 
 const FILE_ENCODING = 'utf-8'
-const todoRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<todoCounter>\d+\s+\|)/gi
-const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skippedCounter>\d+\s+\|)/gi
+const todoRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<todoCounter>\d+\|)/gi
+const skippedRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<skippedCounter>\d+\|)/gi
 const COUNT_TYPE = {
   TODO: {
     type: 'Todo',
@@ -89,7 +89,7 @@ function createNewCounterTable(arr, count, type) {
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `| <date>${date} | <${type.toLowerCase()}Counter>${count} |`
+  const newRow = `|<date>${date}|<${type.toLowerCase()}Counter>${count}|`
 
   arr.push(newRow)
   debug('Added new todo row')
@@ -147,7 +147,7 @@ function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCoun
 
     const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countType)
 
-    fs.writeFile(readMePath, newReadMe, {encoding:FILE_ENCODING, flag: 'a+'}, function (err, data) {
+    fs.writeFile(readMePath, newReadMe, FILE_ENCODING, function (err, data) {
       if (err) throw err
       debug('ReadMe file updated!')
     })
