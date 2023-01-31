@@ -109,15 +109,15 @@ function createNewCounterTable(arr, count, type) {
  * @param {Number} count
  * @returns
  */
-function createNewReadMe(data, oldTable, count,type) {
-  if(typeof data !== 'string') throw new Error(stringErrorMessage(data))
+function createNewReadMe(readMeData, oldTable, count,type) {
+  if(typeof readMeData !== 'string') throw new Error(stringErrorMessage(readMeData))
   if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
   if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
   if(typeof type !== 'string') throw new Error(stringErrorMessage(type))
 
   const tableHeader = `| Date | ${type} Count |\n| :---:| :---:|\n`
-  const startTableTagIndex = data.indexOf(tableHeader)
-  const extractedCounterTable = data.substring(0, startTableTagIndex)
+  const startTableTagIndex = readMeData.indexOf(tableHeader)
+  const extractedCounterTable = readMeData.substring(0, startTableTagIndex)
   const tableWithoutHeader = createNewCounterTable(oldTable, count, type)
     .toString()
     .replace(/\|,/g, '|\n')
