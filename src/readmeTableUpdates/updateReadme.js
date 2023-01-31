@@ -15,7 +15,7 @@ function maybeUpdateReadMeCounter(count, countType) {
   
   if(countType == COUNT_TYPE.TODO.type) {
     headerString = 'Todo'
-    tableHeaderTag  = COUNT_TYPE.TODO.tableHeader
+    tableHeaderTag  = COUNT_TYPE.TODO.type
   } else if (countType == COUNT_TYPE.SKIP.type){
     headerString = 'Skipped Tests'
     tableHeaderTag  = COUNT_TYPE.SKIP.tableHeader
@@ -28,7 +28,7 @@ function maybeUpdateReadMeCounter(count, countType) {
   const readMeContent = fs.readFileSync(fullPath, FILE_ENCODING, function (err, data) {
     if (err) throw err
   })
-  const todoTable = extractTableFromReadme(fullPath, tableHeaderTag)
+  const todoTable = extractTableFromReadme(fullPath, headerString)
 
   maybeUpdateReadmeTable(readmeFile, readMeContent, todoTable, count, tableHeaderTag)
 }

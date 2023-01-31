@@ -8,11 +8,11 @@ const todoRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<todoCounte
 const skippedRowMatcher = /(?<row>\|\s+<date>\d{2}\/\d{2}\/\d{2}\s+\|\s+<skippedCounter>\d+\s+\|)/gi
 const COUNT_TYPE = {
   TODO: {
-    type: 'todo',
+    type: 'Todo',
     tableHeader: 'todoCounter'
   },
   SKIP: {
-    type: 'skipped',
+    type: 'Skipped',
     tableHeader: 'skippedTestsCounter'
   }
 }
@@ -31,9 +31,9 @@ function extractTableFromReadme(readMePath, countType) {
   debug('Extracting todo rows')
   let rowMatcher
 
-  if( countType == COUNT_TYPE.TODO.tableHeader) {
+  if( countType == COUNT_TYPE.TODO.type) {
     rowMatcher = todoRowMatcher
-  } else if (countType == COUNT_TYPE.SKIP.tableHeader) {
+  } else if (countType == COUNT_TYPE.SKIP.type) {
     rowMatcher = skippedRowMatcher
   } else {
     throw new Error(countType + ` is not one of ${util.inspect(COUNT_TYPE)}`)
@@ -89,7 +89,7 @@ function createNewCounterTable(arr, count, type) {
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `| <date>${date} | <${type}Counter>${count} |`
+  const newRow = `| <date>${date} | <${type.toLowerCase()}Counter>${count} |`
 
   arr.push(newRow)
   debug('Added new todo row')
@@ -134,18 +134,18 @@ function createNewReadMe(readMeData, oldTable, count,type) {
  * @param {Number} foundCount found todo/skipped count
  * @param {String} countType todo/skipped 
  */
-function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCount, countHeader) {
+function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCount, countType) {
   if(typeof readMeData !== 'string') throw new Error(stringErrorMessage(readMeData))
   if(!Array.isArray(oldCountTable)) throw new Error(arrayErrorMessage(oldCountTable))
   if(typeof foundCount !== 'number') throw new Error(numberErrorMessage(foundCount))
-  if(typeof countHeader !== 'string') throw new Error(stringErrorMessage(countHeader))
+  if(typeof countType !== 'string') throw new Error(stringErrorMessage(countType))
 
-  const isCountDifferent = checkCounterDifference(oldCountTable, foundCount, countHeader)
+  const isCountDifferent = checkCounterDifference(oldCountTable, foundCount, countType)
 
   if (isCountDifferent) {
     debug('Updating todo table')
 
-    const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countHeader)
+    const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countType)
 
     fs.writeFile(readMePath, newReadMe, {encoding:FILE_ENCODING, flag: 'a+'}, function (err, data) {
       if (err) throw err

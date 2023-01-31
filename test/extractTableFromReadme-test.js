@@ -11,7 +11,7 @@ test('extractTableFromReadme for todoCounter returns a object', (t) => {
     'mockFile1.md': '| <date>01/01/01 | <todoCounter>1  |'
   })
   t.true(
-    typeof extractTableFromReadme('mockFile1.md', COUNT_TYPE.TODO.tableHeader) ===
+    typeof extractTableFromReadme('mockFile1.md', COUNT_TYPE.TODO.type) ===
       'object'
   )
 })
