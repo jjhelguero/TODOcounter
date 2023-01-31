@@ -12,7 +12,7 @@ const COUNT_TYPE = {
     tableHeader: 'todoCounter'
   },
   SKIP: {
-    type: 'Skipped',
+    type: 'Skipped Tests',
     tableHeader: 'skippedTestsCounter'
   }
 }
