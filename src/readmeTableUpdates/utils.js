@@ -134,20 +134,20 @@ function createNewReadMe(data, oldTable, count,type) {
  * @param {Number} foundCount found todo/skipped count
  * @param {String} countType todo/skipped 
  */
-function maybeUpdateReadmeTable(readMe, data, oldTable, foundCount, header) {
-  if(typeof data !== 'string') throw new Error(stringErrorMessage(data))
-  if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
+function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCount, countHeader) {
+  if(typeof readMeData !== 'string') throw new Error(stringErrorMessage(readMeData))
+  if(!Array.isArray(oldCountTable)) throw new Error(arrayErrorMessage(oldCountTable))
   if(typeof foundCount !== 'number') throw new Error(numberErrorMessage(foundCount))
-  if(typeof header !== 'string') throw new Error(stringErrorMessage(header))
+  if(typeof countHeader !== 'string') throw new Error(stringErrorMessage(countHeader))
 
-  const isCountDifferent = checkCounterDifference(oldTable, foundCount, header)
+  const isCountDifferent = checkCounterDifference(oldCountTable, foundCount, countHeader)
 
   if (isCountDifferent) {
     debug('Updating todo table')
 
-    const newReadMe = createNewReadMe(data, oldTable, foundCount, header)
+    const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countHeader)
 
-    fs.writeFile(readMe, newReadMe, FILE_ENCODING, function (err, data) {
+    fs.writeFile(readMePath, newReadMe, {encoding:FILE_ENCODING, flag: 'a+'}, function (err, data) {
       if (err) throw err
       debug('ReadMe file updated!')
     })

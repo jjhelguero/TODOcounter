@@ -25,12 +25,12 @@ function maybeUpdateReadMeCounter(count, countType) {
   const relativePath = `../../${readmeFile}`
 
   const fullPath = path.resolve(__dirname, relativePath)
-  const data = fs.readFileSync(fullPath, FILE_ENCODING, function (err, data) {
+  const readMeContent = fs.readFileSync(fullPath, FILE_ENCODING, function (err, data) {
     if (err) throw err
   })
   const todoTable = extractTableFromReadme(fullPath, tableHeaderTag)
 
-  maybeUpdateReadmeTable(readmeFile, data, todoTable, count, tableHeaderTag)
+  maybeUpdateReadmeTable(readmeFile, readMeContent, todoTable, count, tableHeaderTag)
 }
 
 ;(module.exports = maybeUpdateReadMeCounter)
