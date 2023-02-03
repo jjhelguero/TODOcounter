@@ -9,15 +9,14 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
-        run: npm install
+      - name: NPM install
+        uses: bahmutov/npm-install@v1
       - name: Lint
         run: npm run lint
   tests:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: NPM install
-        uses: bahmutov/npm-install@v1
 
       - name: Test 🧪
         run: npm run test
