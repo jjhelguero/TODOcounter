@@ -10,15 +10,15 @@ const {
   numberErrorMessage
 } = require('../src/readmeTableUpdates/utils')
 
-function expectedUpdatedReadMe(readMeWithOutTable,oldTable, count) {
+function expectedUpdatedReadMe (readMeWithOutTable, oldTable, count) {
   const formattedOldTable = oldTable.toString().replace(',', '\n')
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
   return `${readMeWithOutTable}\n${formattedOldTable}\n|<date>${date}|<todoCounter>${count}|`
 }
 
-const testReadMeWithoutCounterTable = `This is a readme\n\n`
-const tableHeader = `| Date | Todo Count |\n| :---:| :---:|`
+const testReadMeWithoutCounterTable = 'This is a readme\n\n'
+const tableHeader = '| Date | Todo Count |\n| :---:| :---:|'
 
 test('updateReadMe returns new Readme with updated table', (t) => {
   const table = `${tableHeader}
