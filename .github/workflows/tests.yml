@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
-
       - name: NPM install
         uses: bahmutov/npm-install@v1
-
+      - name: Lint
+        run: npm run lint
       - name: Test 🧪
-        run: npm test
+        run: npm run test
