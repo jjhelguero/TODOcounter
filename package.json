@@ -44,12 +44,12 @@
     "dayjs": "^1.11.0",
     "debug": "^4.3.3",
     "lazy-ass": "^2.0.3",
-    "lint-staged": "^12.3.5",
     "mock-fs": "^5.1.2",
     "simple-bin-help": "^1.6.0"
   },
   "devDependencies": {
     "ava": "^4.1.0",
+    "lint-staged": "^13.1.0",
     "pre-git": "^3.17.1",
     "prettier": "^2.8.3",
     "semantic-release": "^19.0.2",
