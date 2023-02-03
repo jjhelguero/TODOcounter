@@ -8,8 +8,8 @@ require('simple-bin-help')({
   minArguments: 2,
   packagePath: __dirname + '/../package.json',
   help:
-    'use    : todo-counter <directory> <file extension>\n' +
-    'example: todo-counter "tests/files" ".js"',
+    'use    : skipped-tests-counter <directory> <file extension>\n' +
+    'example: skipped-tests-counter "tests/files" ".js"',
 })
 
 const directory = process.argv[2]
