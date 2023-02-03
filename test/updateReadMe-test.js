@@ -33,7 +33,7 @@ test('updateReadMe returns new Readme with updated table', (t) => {
   const extractedTable = data.split(tableHeader + '\n')[1]
   const arrayOfOldTable = extractedTable.split(/\n/)
   const count = 100
-  const actualNewReadMe = updateReadMe(data, arrayOfOldTable, count, COUNT_TYPE.TODO.tableHeader)
+  const actualNewReadMe = updateReadMe(data, arrayOfOldTable, count, COUNT_TYPE.TODO.rowTag)
   const expectedNewReadMe = expectedUpdatedReadMe(testReadMeWithoutCounterTable, table, count)
   t.deepEqual(actualNewReadMe, expectedNewReadMe)
 })
@@ -59,7 +59,7 @@ test('updateReadMe returns new Readme with updated table already having 10 entri
   const copy = [...arrayOfOldTable]
   copy.shift()
   const count = 100
-  const actualNewReadMe = updateReadMe(data, copy, count, COUNT_TYPE.TODO.tableHeader)
+  const actualNewReadMe = updateReadMe(data, copy, count, COUNT_TYPE.TODO.rowTag)
   const expectedNewReadMe = expectedUpdatedReadMe(testReadMeWithoutCounterTable, table, count)
   t.deepEqual(actualNewReadMe, expectedNewReadMe)
 })

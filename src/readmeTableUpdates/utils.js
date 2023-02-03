@@ -9,11 +9,11 @@ const skippedRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<skippedCounter>\
 const COUNT_TYPE = {
   TODO: {
     type: 'Todo',
-    tableHeader: 'todoCounter'
+    rowTag: 'todoCounter'
   },
   SKIP: {
     type: 'Skipped',
-    tableHeader: 'skippedTestsCounter'
+    rowTag: 'skippedTestsCounter'
   }
 }
 const arrayErrorMessage = (arr) => `${arr} is not an array`
