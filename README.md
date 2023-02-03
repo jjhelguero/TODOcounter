@@ -6,7 +6,7 @@
 
     npm install -d todo-counter
 
-## Use
+## Todo Count
 
 The following will search for todo comments in `foo/bar` directory and a subdirectories in files matching the `.js` extension.
 
@@ -19,11 +19,25 @@ Examples of TODO's that will be counted:
 //todo: this is be counted
 // todo this will be counted
 ```
+## Skipped Test Count
+
+The following will search for skipped tests in `foo/bar` directory and a subdirectories in files matching the `.js` extension.
+
+    npx skipped-tests-counter 'foo/bar' '.js'
+
+Examples of Skipped Tests that will be counted:
+
+```
+// SKIP: This thing needs fixing
+//skip: this is be counted
+// skip this will be counted
+```
+
 
 ## Expects
 
-The following table structure is expected in your `README` file with `Date` cells including a `<date>` tag and the `Todo Count`
-cells including a `<todoCounter>` tag. If one is not found, the counter will append one at the end of the `README` file.
+The following table structures are expected in your `README` file with `Date` cells including a `<date>` tag and the `Todo Count`/`Skipped Tests Count`
+cells including a `<todoCounter>`/`<skippedTestsCounter>` tag. If one is not found, the counter will append one at the end of the `README` file.
 
 | Date | Todo Count |
 | :---:| :---:|
