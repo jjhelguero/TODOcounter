@@ -17,7 +17,7 @@ function maybeUpdateReadMeCounter(count, countType) {
     headerString = 'Todo'
     tableHeaderTag  = COUNT_TYPE.TODO.rowTag
   } else if (countType == COUNT_TYPE.SKIP.type){
-    headerString = 'Skipped Tests'
+    headerString = 'SkippedTests'
     tableHeaderTag  = COUNT_TYPE.SKIP.rowTag
   }
 

@@ -5,14 +5,14 @@ const util = require('util')
 
 const FILE_ENCODING = 'utf-8'
 const todoRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<todoCounter>\d+\|)/gi
-const skippedRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<skippedCounter>\d+\|)/gi
+const skippedRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<skippedTestsCounter>\d+\|)/gi
 const COUNT_TYPE = {
   TODO: {
     type: 'Todo',
     rowTag: 'todoCounter'
   },
   SKIP: {
-    type: 'Skipped',
+    type: 'SkippedTests',
     rowTag: 'skippedTestsCounter'
   }
 }
@@ -69,7 +69,7 @@ function checkCounterDifference(table, count, countType) {
   if(countType == COUNT_TYPE.TODO.type) {
     lastCountRegex = /<todoCounter>(?<count>\d+)/
   } else if(countType == COUNT_TYPE.SKIP.type) {
-    lastCountRegex = /<skippedCounter>(?<count>\d+)/
+    lastCountRegex = /<skippedTestsCounter>(?<count>\d+)/
   }
   const latestCount = lastRow.match(lastCountRegex)?.groups?.count
   debug(
