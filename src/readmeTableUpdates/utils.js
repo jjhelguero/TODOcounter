@@ -93,7 +93,7 @@ function createNewCounterTable(arr, count, type) {
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<${type.toLowerCase()}Counter>${count}|`
+  const newRow = `|<date>${date}|<${type}>${count}|`
   const cloneArr = [...arr]
 
   cloneArr.push(newRow)
