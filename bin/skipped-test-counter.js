@@ -7,8 +7,9 @@ const is = require('check-more-types')
 require('simple-bin-help')({
   minArguments: 2,
   packagePath: __dirname + '/../package.json',
-  help: 'use    : todo-counter <directory> <file extension>\n' +
-    'example: todo-counter "tests/files" ".js"'
+  help:
+    'use    : todo-counter <directory> <file extension>\n' +
+    'example: todo-counter "tests/files" ".js"',
 })
 
 const directory = process.argv[2]
