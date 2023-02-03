@@ -7,10 +7,10 @@ const {
   COUNT_TYPE,
   stringErrorMessage,
   arrayErrorMessage,
-  numberErrorMessage
+  numberErrorMessage,
 } = require('../src/readmeTableUpdates/utils')
 
-function expectedUpdatedReadMe (readMeWithOutTable, oldTable, count) {
+function expectedUpdatedReadMe(readMeWithOutTable, oldTable, count) {
   const formattedOldTable = oldTable.toString().replace(',', '\n')
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
@@ -27,7 +27,7 @@ test('updateReadMe returns new Readme with updated table', (t) => {
 |<date>03/03/03|<todoCounter>3|
 |<date>04/04/04|<todoCounter>4|`
   mock({
-    'mockFile1.md': `${testReadMeWithoutCounterTable}\n${table}`
+    'mockFile1.md': `${testReadMeWithoutCounterTable}\n${table}`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const extractedTable = data.split(tableHeader + '\n')[1]
@@ -37,12 +37,12 @@ test('updateReadMe returns new Readme with updated table', (t) => {
     data,
     arrayOfOldTable,
     count,
-    COUNT_TYPE.TODO.rowTag
+    COUNT_TYPE.TODO.rowTag,
   )
   const expectedNewReadMe = expectedUpdatedReadMe(
     testReadMeWithoutCounterTable,
     table,
-    count
+    count,
   )
   t.deepEqual(actualNewReadMe, expectedNewReadMe)
 })
@@ -60,7 +60,7 @@ test('updateReadMe returns new Readme with updated table already having 10 entri
 |<date>09/09/09|<todoCounter>9|
 |<date>10/10/10|<todoCounter>10|`
   mock({
-    'mockFile1.md': `${testReadMeWithoutCounterTable}\n${table}`
+    'mockFile1.md': `${testReadMeWithoutCounterTable}\n${table}`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const extractedTable = data.split(tableHeader + '\n')[1]
@@ -72,12 +72,12 @@ test('updateReadMe returns new Readme with updated table already having 10 entri
     data,
     copy,
     count,
-    COUNT_TYPE.TODO.rowTag
+    COUNT_TYPE.TODO.rowTag,
   )
   const expectedNewReadMe = expectedUpdatedReadMe(
     testReadMeWithoutCounterTable,
     table,
-    count
+    count,
   )
   t.deepEqual(actualNewReadMe, expectedNewReadMe)
 })
@@ -87,7 +87,7 @@ test('updateReadMe throws an error when data is not a string', (t) => {
     'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
      |<date>02/02/02|<todoCounter>2|
      |<date>03/03/03|<todoCounter>3|
-     |<date>04/04/04|<todoCounter>4|`
+     |<date>04/04/04|<todoCounter>4|`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
@@ -95,7 +95,7 @@ test('updateReadMe throws an error when data is not a string', (t) => {
   const count = 100
   const expectedErrorMessage = stringErrorMessage(badData)
   const actualError = t.throws(() =>
-    updateReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type)
+    updateReadMe(badData, oldTable, count, COUNT_TYPE.TODO.type),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -105,14 +105,14 @@ test('updateReadMe throws an error when old table is not an array', (t) => {
     'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
      |<date>02/02/02|<todoCounter>2|
      |<date>03/03/03|<todoCounter>3|
-     |<date>04/04/04|<todoCounter>4|`
+     |<date>04/04/04|<todoCounter>4|`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const badOldTable = ''
   const count = 10
   const expectedErrorMessage = arrayErrorMessage(badOldTable)
   const actualError = t.throws(() =>
-    updateReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type)
+    updateReadMe(data, badOldTable, count, COUNT_TYPE.TODO.type),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -122,14 +122,14 @@ test('updateReadMe throws an error when count is not a number', (t) => {
     'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
      |<date>02/02/02|<todoCounter>2|
      |<date>03/03/03|<todoCounter>3|
-     |<date>04/04/04|<todoCounter>4|`
+     |<date>04/04/04|<todoCounter>4|`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
   const badCount = '100'
   const expectedErrorMessage = numberErrorMessage(badCount)
   const actualError = t.throws(() =>
-    updateReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type)
+    updateReadMe(data, oldTable, badCount, COUNT_TYPE.TODO.type),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -139,7 +139,7 @@ test('updateReadMe throws an error when countType is not a string', (t) => {
     'mockFile1.md': `|<date>01/01/01|<todoCounter>1|
      |<date>02/02/02|<todoCounter>2|
      |<date>03/03/03|<todoCounter>3|
-     |<date>04/04/04|<todoCounter>4|`
+     |<date>04/04/04|<todoCounter>4|`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
@@ -147,7 +147,7 @@ test('updateReadMe throws an error when countType is not a string', (t) => {
   const badCountType = null
   const expectedErrorMessage = stringErrorMessage(badCountType)
   const actualError = t.throws(() =>
-    updateReadMe(data, oldTable, count, badCountType)
+    updateReadMe(data, oldTable, count, badCountType),
   )
   t.is(actualError.message, expectedErrorMessage)
 })

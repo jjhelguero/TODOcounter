@@ -6,7 +6,7 @@ const {
   stringErrorMessage,
   arrayErrorMessage,
   numberErrorMessage,
-  COUNT_TYPE
+  COUNT_TYPE,
 } = require('../src/readmeTableUpdates/utils')
 
 test('maybeUpdateReadmeTable throws an error when data is not a string', (t) => {
@@ -14,7 +14,7 @@ test('maybeUpdateReadmeTable throws an error when data is not a string', (t) => 
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`
+        | <date>04/04/04 | <todoCounter>4  |`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
@@ -27,8 +27,8 @@ test('maybeUpdateReadmeTable throws an error when data is not a string', (t) => 
       badData,
       oldTable,
       count,
-      COUNT_TYPE.TODO.type
-    )
+      COUNT_TYPE.TODO.type,
+    ),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -38,7 +38,7 @@ test('maybeUpdateReadmeTable throws an error when old table is not an array', (t
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`
+        | <date>04/04/04 | <todoCounter>4  |`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const badOldTable = ''
@@ -50,8 +50,8 @@ test('maybeUpdateReadmeTable throws an error when old table is not an array', (t
       data,
       badOldTable,
       count,
-      COUNT_TYPE.TODO.type
-    )
+      COUNT_TYPE.TODO.type,
+    ),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -61,7 +61,7 @@ test('maybeUpdateReadmeTable throws an error when count is not a number', (t) =>
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`
+        | <date>04/04/04 | <todoCounter>4  |`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
@@ -73,8 +73,8 @@ test('maybeUpdateReadmeTable throws an error when count is not a number', (t) =>
       data,
       oldTable,
       badCount,
-      COUNT_TYPE.TODO.type
-    )
+      COUNT_TYPE.TODO.type,
+    ),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -84,7 +84,7 @@ test('maybeUpdateReadmeTable throws an error when countType is not a string', (t
     'mockFile1.md': `| <date>01/01/01 | <todoCounter>1  |
         | <date>02/02/02 | <todoCounter>2  |
         | <date>03/03/03 | <todoCounter>3  |
-        | <date>04/04/04 | <todoCounter>4  |`
+        | <date>04/04/04 | <todoCounter>4  |`,
   })
   const data = fs.readFileSync('mockFile1.md').toString()
   const oldTable = data.split(/\n {8}/)
@@ -92,7 +92,7 @@ test('maybeUpdateReadmeTable throws an error when countType is not a string', (t
   const badCountType = null
   const expectedErrorMessage = stringErrorMessage(badCountType)
   const actualError = t.throws(() =>
-    maybeUpdateReadmeTable('mockFile1.md', data, oldTable, count, badCountType)
+    maybeUpdateReadmeTable('mockFile1.md', data, oldTable, count, badCountType),
   )
   t.is(actualError.message, expectedErrorMessage)
 })
