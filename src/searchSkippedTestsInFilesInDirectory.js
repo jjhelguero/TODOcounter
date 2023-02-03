@@ -2,7 +2,7 @@ const fs = require('fs')
 const util = require('util')
 const { getFilesInDirectory, getCount } = require('./utils')
 const debug = require('debug')('searchTodosInFilesInDirectory')
-const skippedTestRegex = /\/{2}\s?skip(\s|:)?/
+const skippedTestRegex = /\/{2}\s?skip(\s|:)?/gi
 
 /**
  * Function to get total count of todos within files matching ext within
@@ -11,7 +11,7 @@ const skippedTestRegex = /\/{2}\s?skip(\s|:)?/
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchSkippedTestsInFilesInDirectory (dir, ext) {
+function searchSkippedTestsInFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return

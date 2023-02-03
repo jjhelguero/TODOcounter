@@ -8,10 +8,10 @@ test('getFilesInDirectory returns object of more than 1 file', (t) => {
       'mockFile1.js': '//todo\n// todo',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// todo'
+        'mockFile2.js': '// todo',
       },
-      'mockFile.java': ''
-    }
+      'mockFile.java': '',
+    },
   })
   t.true(typeof getFilesInDirectory('fakeDir', '.js') === 'object')
   t.true(getFilesInDirectory('fakeDir', '.js').length >= 1)

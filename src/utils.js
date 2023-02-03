@@ -8,7 +8,7 @@ const debug = require('debug')('utils')
  * @param {Array<string>} files
  * @returns {Number} returns total todo count in files
  */
-function getCount (files, regex) {
+function getCount(files, regex) {
   const flags = 'ig'
   let count = 0
 
@@ -36,10 +36,10 @@ function getCount (files, regex) {
  * with matching ext and returns an array of strings for matching
  * files
  * @param {String} dir directory string
- * @param {String} ext file extenstion string
+ * @param {String} ext file extension string
  * @returns {Array<string>} returns array of files with matching extension
  */
-function getFilesInDirectory (dir, ext) {
+function getFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
@@ -54,7 +54,7 @@ function getFilesInDirectory (dir, ext) {
       const nestedFiles = getFilesInDirectory(filePath, ext)
       files = files.concat(nestedFiles)
     } else {
-      if (path.extname(file) === ext) {
+      if (ext.includes(path.extname(file))) {
         files.push(filePath)
       }
     }

@@ -2,7 +2,7 @@ const fs = require('fs')
 const util = require('util')
 const { getFilesInDirectory, getCount } = require('./utils')
 const debug = require('debug')('searchTodosInFilesInDirectory')
-const todoRegex = /\/{2}\s?todo(\s|:)?/
+const todoRegex = /\/{2}\s?todo(\s|:)?/gi
 
 /**
  * Function to get total count of todos within files matching ext within
@@ -11,7 +11,7 @@ const todoRegex = /\/{2}\s?todo(\s|:)?/
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchTodosInFilesInDirectory (dir, ext) {
+function searchTodosInFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
