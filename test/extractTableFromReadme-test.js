@@ -35,5 +35,5 @@ test('extractTableFromReadme throws error when file is not passed', (t) => {
   mock({
     path: {}
   })
-  t.throws(() => extractTableFromReadme('path', COUNT_TYPE.TODO.tableHeader))
+  t.throws(() => extractTableFromReadme('path', COUNT_TYPE.TODO.rowTag))
 })
