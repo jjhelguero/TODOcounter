@@ -8,7 +8,7 @@ const debug = require('debug')('utils')
  * @param {Array<string>} files
  * @returns {Number} returns total todo count in files
  */
-function getCount (files, regex) {
+function getCount(files, regex) {
   const flags = 'ig'
   let count = 0
 
@@ -39,7 +39,7 @@ function getCount (files, regex) {
  * @param {String} ext file extension string
  * @returns {Array<string>} returns array of files with matching extension
  */
-function getFilesInDirectory (dir, ext) {
+function getFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return

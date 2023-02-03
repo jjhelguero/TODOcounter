@@ -11,7 +11,7 @@ const todoRegex = /\/{2}\s?todo(\s|:)?/gi
  * @param {String} ext file extenstion string
  * @returns {Number} returns total todo count in files
  */
-function searchTodosInFilesInDirectory (dir, ext) {
+function searchTodosInFilesInDirectory(dir, ext) {
   if (!fs.existsSync(dir)) {
     debug(`Specified directory: ${dir} does not exist`)
     return
