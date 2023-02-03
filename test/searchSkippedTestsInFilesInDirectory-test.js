@@ -8,10 +8,10 @@ test('searchSkippedTestsInFilesInDirectory returns a number', (t) => {
       'mockFile1.js': '//skip\n// skip',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// skip:',
+        'mockFile2.js': '// skip:'
       },
-      'mockFile.java': '',
-    },
+      'mockFile.java': ''
+    }
   })
   const num = searchSkippedTestsInFilesInDirectory('fakeDir', '.js')
   t.true(typeof num === 'number')
@@ -23,10 +23,10 @@ test('searchSkippedTestsInFilesInDirectory returns count of 3', (t) => {
       'mockFile1.js': '//skip\n// skip',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// skip:',
+        'mockFile2.js': '// skip:'
       },
-      'mockFile.java': '',
-    },
+      'mockFile.java': ''
+    }
   })
   const num = searchSkippedTestsInFilesInDirectory('fakeDir', '.js')
   t.true(num >= 1)
@@ -43,7 +43,7 @@ test('searchSkippedTestsInFilesInDirectory should return empty string with undef
   const undefinedDirectory = undefined
   t.is(
     searchSkippedTestsInFilesInDirectory(undefinedDirectory, validExt),
-    undefined,
+    undefined
   )
 })
 
@@ -51,6 +51,6 @@ test('searchSkippedTestsInFilesInDirectory should return empty string with inval
   const validExt = '.js'
   t.is(
     searchSkippedTestsInFilesInDirectory('invalidDirect', validExt),
-    undefined,
+    undefined
   )
 })
