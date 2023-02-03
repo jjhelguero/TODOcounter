@@ -4,8 +4,8 @@
   "description": "Count todo comments in given directory with filter ext",
   "main": "src/index.js",
   "scripts": {
-    "format": "prettier --write 'src/*.js' 'test/*.js'",
-    "lint": "standard --fix src/*.js test/*.js",
+    "format": "prettier --write '**/*.js'",
+    "format:check": "prettier --check --cache '**/*.js'",
     "test": "ava test",
     "demo-todo": "node ./bin/todo-counter.js 'demo' '.js'",
     "demo-skipped-tests": "node ./bin/skipped-test-counter.js 'demo' '.js'",
@@ -45,12 +45,12 @@
     "lazy-ass": "^2.0.3",
     "lint-staged": "^12.3.5",
     "mock-fs": "^5.1.2",
-    "prettier": "^2.5.1",
     "simple-bin-help": "^1.6.0"
   },
   "devDependencies": {
     "ava": "^4.1.0",
     "pre-git": "^3.17.1",
+    "prettier": "^2.8.3",
     "semantic-release": "^19.0.2",
     "standard": "^16.0.4"
   },
@@ -60,6 +60,7 @@
         "simple"
       ],
       "pre-commit": [
+        "npm run format:check",
         "npm run test"
       ],
       "pre-push": [],
