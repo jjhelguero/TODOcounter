@@ -1,6 +1,5 @@
 const fs = require('fs')
 const debug = require('debug')('updateReadMeTodoCounter')
-const path = require('path')
 const {
   extractTableFromReadme,
   maybeUpdateReadmeTable,
@@ -26,17 +25,14 @@ function maybeUpdateReadMeCounter(count, countType) {
   }
 
   debug(`Reading ${readmeFile} file`)
-  const relativePath = `../../${readmeFile}`
-
-  const fullPath = path.resolve(__dirname, relativePath)
   const readMeContent = fs.readFileSync(
-    fullPath,
+    readmeFile,
     FILE_ENCODING,
     function (err, data) {
       if (err) throw err
     },
   )
-  const countTable = extractTableFromReadme(fullPath, headerString)
+  const countTable = extractTableFromReadme(readmeFile, headerString)
 
   maybeUpdateReadmeTable(
     readmeFile,
