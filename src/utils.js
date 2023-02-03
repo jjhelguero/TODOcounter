@@ -36,7 +36,7 @@ function getCount (files, regex) {
  * with matching ext and returns an array of strings for matching
  * files
  * @param {String} dir directory string
- * @param {String} ext file extenstion string
+ * @param {String} ext file extension string
  * @returns {Array<string>} returns array of files with matching extension
  */
 function getFilesInDirectory (dir, ext) {
@@ -54,7 +54,7 @@ function getFilesInDirectory (dir, ext) {
       const nestedFiles = getFilesInDirectory(filePath, ext)
       files = files.concat(nestedFiles)
     } else {
-      if (path.extname(file) == ext) {
+      if (ext.includes(path.extname(file))) {
         files.push(filePath)
       }
     }

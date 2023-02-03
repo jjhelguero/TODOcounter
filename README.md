@@ -37,3 +37,17 @@ cells including a `<todoCounter>` tag. If one is not found, the counter will app
 |<date>08/08/08|<todoCounter>8|
 |<date>09/09/09|<todoCounter>9|
 |<date>10/10/10|<todoCounter>10|
+
+
+| Date | Skipped Tests Count |
+| :---:| :---:|
+|<date>01/01/01|<skippedTestsCounter>1|
+|<date>02/02/02|<skippedTestsCounter>2|
+|<date>03/03/03|<skippedTestsCounter>3|
+|<date>04/04/04|<skippedTestsCounter>4|
+|<date>05/05/05|<skippedTestsCounter>5|
+|<date>06/06/06|<skippedTestsCounter>6|
+|<date>07/07/07|<skippedTestsCounter>7|
+|<date>08/08/08|<skippedTestsCounter>8|
+|<date>09/09/09|<skippedTestsCounter>9|
+|<date>10/10/10|<skippedTestsCounter>10|

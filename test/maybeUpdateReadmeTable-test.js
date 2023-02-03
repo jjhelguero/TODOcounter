@@ -1,7 +1,7 @@
 const test = require('ava')
 const mock = require('mock-fs')
-const fs = require ('fs')
-const {maybeUpdateReadmeTable, stringErrorMessage, arrayErrorMessage, numberErrorMessage, COUNT_TYPE} = require ('../src/readmeTableUpdates/utils')
+const fs = require('fs')
+const { maybeUpdateReadmeTable, stringErrorMessage, arrayErrorMessage, numberErrorMessage, COUNT_TYPE } = require('../src/readmeTableUpdates/utils')
 
 test('maybeUpdateReadmeTable throws an error when data is not a string', (t) => {
   mock({

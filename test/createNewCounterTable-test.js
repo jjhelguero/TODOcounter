@@ -23,12 +23,12 @@ test('createNewCounterTable returns new counter Table when table is less than 10
   ]
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.tableHeader}>${count}|`
-  const newTable = table
+  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.rowTag}>${count}|`
+  const newTable = [...table]
   newTable.push(newRow)
 
   t.deepEqual(
-    createNewCounterTable(table, count, COUNT_TYPE.TODO.tableHeader),
+    createNewCounterTable(table, count, COUNT_TYPE.TODO.rowTag),
     newTable
   )
 })
@@ -49,13 +49,13 @@ test('createNewCounterTable returns new counter Table when table is 10 rows', (t
   ]
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `| <date>${date} | <${COUNT_TYPE.TODO.tableHeader}>${count} |`
-  const newTable = table
+  const newRow = `|<date>${date}|<${COUNT_TYPE.TODO.rowTag}>${count}|`
+  const newTable = [...table]
   newTable.push(newRow)
   newTable.shift()
 
   t.deepEqual(
-    createNewCounterTable(table, count, COUNT_TYPE.TODO.tableHeader),
+    createNewCounterTable(table, count, COUNT_TYPE.TODO.rowTag),
     newTable
   )
 })
@@ -64,7 +64,7 @@ test('createNewCounterTable throws error when table is not an array', (t) => {
   const notTable = 't'
   const expectedErrorMessage = arrayErrorMessage(notTable)
   const actualError = t.throws(() =>
-    createNewCounterTable(notTable, 2, COUNT_TYPE.TODO.tableHeader)
+    createNewCounterTable(notTable, 2, COUNT_TYPE.TODO.rowTag)
   )
   t.is(actualError.message, expectedErrorMessage)
 })
@@ -74,7 +74,7 @@ test('createNewCounterTable throws error when count is not a number', (t) => {
   const notNumber = '9'
   const expectedErrorMessage = numberErrorMessage(notNumber)
   const actualError = t.throws(() =>
-    createNewCounterTable(table, notNumber, COUNT_TYPE.TODO.tableHeader)
+    createNewCounterTable(table, notNumber, COUNT_TYPE.TODO.rowTag)
   )
   t.is(actualError.message, expectedErrorMessage)
 })

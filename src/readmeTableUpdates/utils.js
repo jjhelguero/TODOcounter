@@ -9,16 +9,20 @@ const skippedRowMatcher = /(?<row>\|<date>\d{2}\/\d{2}\/\d{2}\|<skippedCounter>\
 const COUNT_TYPE = {
   TODO: {
     type: 'Todo',
-    tableHeader: 'todoCounter'
+    rowTag: 'todoCounter'
   },
   SKIP: {
-    type: 'Skipped Tests',
-    tableHeader: 'skippedTestsCounter'
+    type: 'Skipped',
+    rowTag: 'skippedTestsCounter'
   }
 }
 const arrayErrorMessage = (arr) => `${arr} is not an array`
 const numberErrorMessage = (num) => `${num} is not a number`
 const stringErrorMessage = (type) => `${type} is not a string`
+
+function formatArrayToStringTable(arr) {
+return arr.toString().replace(/\|,/g, '|\n')
+}
 
 /**
  * Utility function to extract todo table from existing
@@ -89,48 +93,46 @@ function createNewCounterTable(arr, count, type) {
 
   const d = new Date()
   const date = dayjs(d).format('MM/DD/YY')
-  const newRow = `|<date>${date}|<${type.toLowerCase()}Counter>${count}|`
+  const newRow = `|<date>${date}|<${type}>${count}|`
+  const cloneArr = [...arr]
 
-  arr.push(newRow)
+  cloneArr.push(newRow)
   debug('Added new todo row')
 
-  if (arr.length > 10) {
-    arr.shift()
+  if (cloneArr.length > 10) {
+    cloneArr.shift()
     debug('Removed first(old) todo row')
   }
 
-  return arr
+  return cloneArr
 }
 
 /**
- * Utilty function to create new Readme
+ * Utility function to update counter table in ReadMe fie
  * @param {File} data
  * @param {String} oldTable
  * @param {Number} count
+ * @param {String} type 'todo' or 'skippedTest'
  * @returns
  */
-function createNewReadMe(readMeData, oldTable, count,type) {
+function updateReadMe(readMeData, oldTable, count,type) {
   if(typeof readMeData !== 'string') throw new Error(stringErrorMessage(readMeData))
   if(!Array.isArray(oldTable)) throw new Error(arrayErrorMessage(oldTable))
   if(typeof count !== 'number') throw new Error(numberErrorMessage(count))
   if(typeof type !== 'string') throw new Error(stringErrorMessage(type))
 
-  const tableHeader = `| Date | ${type} Count |\n| :---:| :---:|\n`
-  const startTableTagIndex = readMeData.indexOf(tableHeader)
-  const extractedCounterTable = readMeData.substring(0, startTableTagIndex)
   const tableWithoutHeader = createNewCounterTable(oldTable, count, type)
-    .toString()
-    .replace(/\|,/g, '|\n')
-  const newCounterTable = tableHeader.concat(tableWithoutHeader, '\n')
-
-  return extractedCounterTable.concat(newCounterTable)
+  const formattedTableWithoutHeader = formatArrayToStringTable(tableWithoutHeader)
+  const formattedOldTable = formatArrayToStringTable(oldTable)
+  return readMeData.replace(formattedOldTable, formattedTableWithoutHeader)
 }
 
 /**
- * 
+ * Checks to see if the counterTable is outdated and will update the table
+ * if need be
  * @param {File} readMe Readme file
  * @param {String} data data from fs.readFile
- * @param {String} oldTable outdated table
+ * @param {Array} oldCountTable outdated table
  * @param {Number} foundCount found todo/skipped count
  * @param {String} countType todo/skipped 
  */
@@ -145,7 +147,7 @@ function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCoun
   if (isCountDifferent) {
     debug('Updating todo table')
 
-    const newReadMe = createNewReadMe(readMeData, oldCountTable, foundCount, countType)
+    const newReadMe = updateReadMe(readMeData, oldCountTable, foundCount, countType)
 
     fs.writeFile(readMePath, newReadMe, FILE_ENCODING, function (err, data) {
       if (err) throw err
@@ -159,7 +161,7 @@ function maybeUpdateReadmeTable(readMePath, readMeData, oldCountTable, foundCoun
 ;(module.exports = {
   extractTableFromReadme, 
   checkCounterDifference, 
-  createNewReadMe, 
+  updateReadMe, 
   maybeUpdateReadmeTable,
   createNewCounterTable,
   COUNT_TYPE, 
