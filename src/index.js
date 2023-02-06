@@ -2,12 +2,13 @@ const { lazyAss } = require('lazy-ass')
 const is = require('check-more-types')
 const check = require('check-more-types')
 const searchTodosInFilesInDirectory = require('./searchTodosInFilesInDirectory')
+const searchSkippedTestsInFilesInDirectory = require('./searchSkippedTestsInFilesInDirectory')
 const maybeUpdateReadMeCounter = require('./readmeTableUpdates/updateReadme')
 const { COUNT_TYPE } = require('./readmeTableUpdates/utils')
 
 function todoCounter(dir, ext) {
-  lazyAss(is.unemptyString(dir), 'expect search directory', dir)
-  lazyAss(check.arrayOf(check.unemptyString, ext), 'expect file filter', ext)
+  lazyAss(is.unemptyString(dir), 'expected', dir, 'to be a string')
+  lazyAss(check.unemptyString(ext), 'expected', ext, 'to be a string')
 
   const currentTodos = searchTodosInFilesInDirectory(dir, ext)
 
@@ -20,10 +21,10 @@ function todoCounter(dir, ext) {
 }
 
 function skippedTestCounter(dir, ext) {
-  lazyAss(is.unemptyString(dir), 'expect search directory', dir)
-  lazyAss(check.arrayOf(check.unemptyString, ext), 'expect file filter', ext)
+  lazyAss(is.unemptyString(dir), 'expected', dir, 'to be a string')
+  lazyAss(check.unemptyString(ext), 'expected', ext, 'to be a string')
 
-  const skippedTests = searchTodosInFilesInDirectory(dir, ext)
+  const skippedTests = searchSkippedTestsInFilesInDirectory(dir, ext)
 
   lazyAss(
     is.number(skippedTests),
