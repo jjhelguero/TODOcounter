@@ -10,6 +10,7 @@ function nothing() {
 // todowillnotbecounted
 // TODO add another valid todo
 
-// SKIP: this will be counted
-//SKIP: this will be counted
-// skip  this will be counted
+// it.skip
+// describe.skip
+//SKIP: this will be NOT counted
+// skip  this will be NOt counted

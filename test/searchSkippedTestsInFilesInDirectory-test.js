@@ -5,7 +5,7 @@ const searchSkippedTestsInFilesInDirectory = require('../src/searchSkippedTestsI
 test('searchSkippedTestsInFilesInDirectory returns a number', (t) => {
   mock({
     fakeDir: {
-      'mockFile1.js': '//skip\n// skip',
+      'mockFile1.js': 'it.skip\ndescribe.skip',
       'empty-dir': {},
       sub: {
         'mockFile2.js': '// skip:',
@@ -17,19 +17,19 @@ test('searchSkippedTestsInFilesInDirectory returns a number', (t) => {
   t.true(typeof num === 'number')
 })
 
-test('searchSkippedTestsInFilesInDirectory returns count of 3', (t) => {
+test('searchSkippedTestsInFilesInDirectory returns count of 2', (t) => {
   mock({
     fakeDir: {
-      'mockFile1.js': '//skip\n// skip',
+      'mockFile1.js': 'it.skip\n// skip:',
       'empty-dir': {},
       sub: {
-        'mockFile2.js': '// skip:',
+        'mockFile2.js': 'describe.skip',
       },
       'mockFile.java': '',
     },
   })
   const num = searchSkippedTestsInFilesInDirectory('fakeDir', '.js')
-  t.true(num >= 1)
+  t.true(num == 2)
 })
 
 test('searchSkippedTestsInFilesInDirectory should return empty string with null directory', (t) => {
