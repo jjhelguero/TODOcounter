@@ -7,8 +7,8 @@
     "format": "prettier --write '**/*.js'",
     "format:check": "prettier --check --cache '**/*.js'",
     "test": "ava test",
-    "demo-todo": "node ./bin/todo-counter.js 'demo' '.js'",
-    "demo-skipped-tests": "node ./bin/skipped-test-counter.js 'demo' '.js'",
+    "demo-todo": "node ./bin/count.js --todo 'demo' '.js'",
+    "demo-skipped-tests": "node ./bin/count.js --skipped 'demo' '.js'",
     "semantic-release": "semantic-release",
     "commit": "commit-wizard"
   },
