@@ -2,7 +2,7 @@ const fs = require('fs')
 const util = require('util')
 const { getFilesInDirectory, getCount } = require('./utils')
 const debug = require('debug')('searchTodosInFilesInDirectory')
-const skippedTestRegex = /\/{2}\s?skip(\s|:)?/gi
+const skippedTestRegex = /\.skip/gi
 
 /**
  * Function to get total count of todos within files matching ext within
