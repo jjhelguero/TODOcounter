@@ -27,7 +27,7 @@ test('maybeUpdateReadmeTable throws an error when data is not a string', (t) => 
       badData,
       oldTable,
       count,
-      COUNT_TYPE.TODO.type,
+      COUNT_TYPE.TODO.rowTag,
     ),
   )
   t.is(actualError.message, expectedErrorMessage)
@@ -50,7 +50,7 @@ test('maybeUpdateReadmeTable throws an error when old table is not an array', (t
       data,
       badOldTable,
       count,
-      COUNT_TYPE.TODO.type,
+      COUNT_TYPE.TODO.rowTag,
     ),
   )
   t.is(actualError.message, expectedErrorMessage)
@@ -73,7 +73,7 @@ test('maybeUpdateReadmeTable throws an error when count is not a number', (t) =>
       data,
       oldTable,
       badCount,
-      COUNT_TYPE.TODO.type,
+      COUNT_TYPE.TODO.rowTag,
     ),
   )
   t.is(actualError.message, expectedErrorMessage)
