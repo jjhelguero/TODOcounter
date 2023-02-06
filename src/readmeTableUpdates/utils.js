@@ -69,9 +69,9 @@ function checkCounterDifference(table, count, countType) {
 
   let lastCountRegex
   const lastRow = table[table.length - 1]
-  if (countType == COUNT_TYPE.TODO.type) {
+  if (countType == COUNT_TYPE.TODO.rowTag) {
     lastCountRegex = /<todoCounter>(?<count>\d+)/
-  } else if (countType == COUNT_TYPE.SKIP.type) {
+  } else if (countType == COUNT_TYPE.SKIP.rowTag) {
     lastCountRegex = /<skippedTestsCounter>(?<count>\d+)/
   }
   const latestCount = lastRow.match(lastCountRegex)?.groups?.count

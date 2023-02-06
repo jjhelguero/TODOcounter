@@ -18,9 +18,9 @@ let help =
 
 function getDirectoryAndGetFileExt(minArgs, pPath, h) {
   require('simple-bin-help')({
-    minArguments,
-    packagePath,
-    help,
+    minArguments: minArgs,
+    packagePath: pPath,
+    help: h,
   })
 
   const directory = process.argv[3]
