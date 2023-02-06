@@ -13,8 +13,7 @@
     "commit": "commit-wizard"
   },
   "bin": {
-    "todo-counter": "bin/todo-counter.js",
-    "skipped-tests": "bin/skipped-test-counter.js"
+    "todo-counter": "bin/count.js"
   },
   "repository": {
     "type": "git",
