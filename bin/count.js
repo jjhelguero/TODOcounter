@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const arg = require('arg')
 const debug = require('debug')('todo-counter')
 const { lazyAss } = require('lazy-ass')
