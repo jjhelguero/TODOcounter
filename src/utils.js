@@ -54,7 +54,8 @@ function getFilesInDirectory(dir, ext) {
       const nestedFiles = getFilesInDirectory(filePath, ext)
       files = files.concat(nestedFiles)
     } else {
-      if (ext.includes(path.extname(file))) {
+      const fileExt = path.extname(file)
+      if (ext.includes(fileExt)) {
         files.push(filePath)
       }
     }
