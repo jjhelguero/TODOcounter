@@ -34,7 +34,7 @@ function formatArrayToStringTable(arr) {
  * @returns number length
  */
 function extractTableFromReadme(readMePath, countType) {
-  debug('Extracting todo rows')
+  debug('Extracting rows')
   let rowMatcher
 
   if (countType == COUNT_TYPE.TODO.type) {
@@ -75,7 +75,7 @@ function checkCounterDifference(table, count, countType) {
     lastCountRegex = /<skippedTestsCounter>(?<count>\d+)/
   }
   const latestCount = lastRow.match(lastCountRegex)?.groups?.count
-  debug(`Latest table todo count: ${latestCount}\nFound todo count: ${count}`)
+  debug(`Latest table count: ${latestCount}\nFound count: ${count}`)
 
   return latestCount != count
 }
@@ -98,11 +98,11 @@ function createNewCounterTable(arr, count, type) {
   const cloneArr = [...arr]
 
   cloneArr.push(newRow)
-  debug('Added new todo row')
+  debug('Added new row')
 
   if (cloneArr.length > 10) {
     cloneArr.shift()
-    debug('Removed first(old) todo row')
+    debug('Removed first(old) row')
   }
 
   return cloneArr
@@ -162,7 +162,7 @@ function maybeUpdateReadmeTable(
   )
 
   if (isCountDifferent) {
-    debug('Updating todo table')
+    debug('Updating table')
 
     const newReadMe = updateReadMe(
       readMeData,
@@ -176,7 +176,7 @@ function maybeUpdateReadmeTable(
       debug('ReadMe file updated!')
     })
   } else {
-    console.log('No change in todo count')
+    console.log('No change in count')
   }
 }
 
