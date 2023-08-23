@@ -70,8 +70,5 @@
       "post-merge": [],
       "allow-untracked-files": true
     }
-  },
-  "release": {
-    "analyzeCommits": "simple-commit-message"
   }
 }
