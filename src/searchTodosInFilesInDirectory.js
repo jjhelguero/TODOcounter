@@ -1,7 +1,8 @@
 const fs = require('fs')
 const util = require('util')
 const { getFilesInDirectory, getCount } = require('./utils')
-const debug = require('debug')('searchTodosInFilesInDirectory')
+const debug = require('debug')('todo-counter')
+
 const todoRegex = /\/{2}\s?todo(\s|:)?/gi
 
 /**
