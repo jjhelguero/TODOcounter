@@ -1,5 +1,6 @@
 const fs = require('fs')
-const debug = require('debug')('updateReadMeTodoCounter')
+const debug = require('debug')('todo-counter')
+
 const {
   extractTableFromReadme,
   maybeUpdateReadmeTable,
@@ -15,6 +16,8 @@ const {
 function maybeUpdateReadMeCounter(count, countType) {
   const readmeFile = 'README.md'
   let headerString, tableHeaderTag
+
+  debug({ count, countType })
 
   if (countType == COUNT_TYPE.TODO.type) {
     headerString = 'Todo'

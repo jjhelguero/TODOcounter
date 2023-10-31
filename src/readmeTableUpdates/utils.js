@@ -1,5 +1,5 @@
 const dayjs = require('dayjs')
-const debug = require('debug')('updateReadMeTodoCounter')
+const debug = require('debug')('todo-counter')
 const fs = require('fs')
 const util = require('util')
 
@@ -176,7 +176,7 @@ function maybeUpdateReadmeTable(
       debug('ReadMe file updated!')
     })
   } else {
-    console.log('No change in count')
+    console.log('No change in count %d', foundCount)
   }
 }
 
